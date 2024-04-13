@@ -1,117 +1,118 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+import notifee from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { StripeProvider } from '@stripe/stripe-react-native';
+import { extendTheme, NativeBaseProvider } from 'native-base';
+import React, { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Provider } from 'react-redux';
+import AppRoot from './src';
+import { store } from './src/store';
+import fonts from './assets/fonts';
+GoogleSignin.configure({
+  iosClientId: "986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008.apps.googleusercontent.com",
+  webClientId:"986930678283-3ennf744fbg23gu305t4hql9cvbqfp6n.apps.googleusercontent.com"
+  // scopes:[
+  //     `https://www.googleapis.com/auth/drive.readonly`,
+  //     `https://www.googleapis.com/auth/youtube`,
+  //     `https://www.googleapis.com/auth/youtube.upload`,
+  //     `https://www.googleapis.com/auth/plus.login`
+  //     ],
 });
+const App = () => {
+  useEffect(() => {
+    messaging().onMessage(onMessageReceived);
+  }, [])
+  async function onMessageReceived(message) {
+    console.log(message)
+    await notifee.requestPermission()
+    // Create a channel (required for Android)
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'Default Channel',
+    });
+    console.log(message)
+    // Display a notification
+    await notifee.displayNotification({
+      title: message.notification?.title ?? "Hey",
+      body: message.notification?.body ?? "We Hope You like the App",
+      android: {
+        channelId,
+        //smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
+        // pressAction is needed if you want the notification to open the app when pressed
+        pressAction: {
+          id: 'default',
+        },
+      },
+    });
+  }
+  const theme = extendTheme({
+    fontConfig: {
+      Mulish: {
+        100: {
+          normal: fonts.light
+          //italic: "Roboto-LightItalic",
+        },
+        200: {
+          normal: fonts.light
+          //italic: "Roboto-LightItalic",
+        },
+        300: {
+          normal: fonts.regular,
+          //italic: "Roboto-LightItalic",
+        },
+        400: {
+          normal: fonts.regular,
+          //italic: "Roboto-Italic",
+        },
+        500: {
+          normal: fonts.medium
+        },
+        600: {
+          normal: fonts.medium
+        },
+        700: {
+          normal: fonts.medium
+        },
+        800: {
+          normal: fonts.medium
+        },
+        900: {
+          normal: fonts.bold,
+        },
+        1000: {
+          normal: fonts.bold
+        }
+      },
+    },
 
-export default App;
+    // Make sure values below matches any of the keys in `fontConfig`
+    fonts: {
+      heading: "Poppins-Regular",
+      body: "Poppins-Regular",
+      mono: "Poppins-Regular",
+    },
+  });
+  return (
+    <GestureHandlerRootView style={{flex:1}}>
+    <StripeProvider
+        publishableKey={""}
+    // merchantIdentifier="merchant.identifier" // required for Apple Pay
+    //urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
+    >
+        
+            <Provider store={store}>
+            
+                <NativeBaseProvider theme={theme}>
+                
+                <AppRoot />
+               
+                </NativeBaseProvider>
+                
+            </Provider>
+            
+    </StripeProvider >
+   </GestureHandlerRootView>
+  )
+}
+export default App

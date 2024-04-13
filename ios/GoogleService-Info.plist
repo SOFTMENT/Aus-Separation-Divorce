@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>986930678283-e3uqu9ubij0jdv73k8ler1aq2glk4bn5.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDD0n1Gaw01Ec7uL2VgflObMzZUe2P9YRk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>986930678283</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>in.softment.ausseprationdivorce</string>
+	<key>PROJECT_ID</key>
+	<string>aus-sepration-divorce</string>
+	<key>STORAGE_BUCKET</key>
+	<string>aus-sepration-divorce.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:986930678283:ios:e17319ef1ff6013642950e</string>
+</dict>
+</plist>

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "986930678283",
+    "project_id": "aus-sepration-divorce",
+    "storage_bucket": "aus-sepration-divorce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986930678283:android:cbe92dc8febecf9942950e",
+        "android_client_info": {
+          "package_name": "in.softment.ausseprationdivorce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986930678283-e3uqu9ubij0jdv73k8ler1aq2glk4bn5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.softment.ausseprationdivorce",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "986930678283-3ennf744fbg23gu305t4hql9cvbqfp6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANe6gD23xGqJ8tMU0Z4SaMnSMnv4DEy6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986930678283-3ennf744fbg23gu305t4hql9cvbqfp6n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "in.softment.ausseprationdivorce"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
