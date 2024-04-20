@@ -60,3 +60,8 @@ export const userBookingFilter =
       id: 2
     }
   ]
+  export const membershipOfferings = [
+      "Unlimited Advertisers",
+      "No Maintenance fees",
+      "No update fees"
+  ]

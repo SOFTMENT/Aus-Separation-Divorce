@@ -20,8 +20,8 @@ const OnBoardPhoto = (props) => {
     const { navigation, route } = props
     const [profilePic, setProfilePic] = useState(null)
     const [loading, setLoading] = useState(null)
-    const [address, setAddress] = useState("")
-    const [contact, setContact] = useState("")
+    // const [address, setAddress] = useState("")
+    // const [contact, setContact] = useState("")
     const {
         isOpen,
         onToggle,
@@ -37,12 +37,12 @@ const OnBoardPhoto = (props) => {
         if(!profilePic){
             Util.showMessage("error","Please upload a profile pic.")
         }
-        else if(contact.length == 0){
-            Util.showMessage("error","Please enter contact number.")
-        }
-        else if(address.length == 0){
-            Util.showMessage("error","Please enter address.")
-        }
+        // else if(contact.length == 0){
+        //     Util.showMessage("error","Please enter contact number.")
+        // }
+        // else if(address.length == 0){
+        //     Util.showMessage("error","Please enter address.")
+        // }
         else{
             handleNavigation()
         }
@@ -65,8 +65,8 @@ const OnBoardPhoto = (props) => {
                     {
                         profilePic: profileUrl,
                         profileCompleted: true,
-                        contact,
-                        address
+                        // contact,
+                        // address
                     }
                 )
                 .then(() => {
@@ -110,7 +110,7 @@ const OnBoardPhoto = (props) => {
                     resizeMode='contain'
                 />
             <View style={styles.mainView}>
-                <Text style={styles.subText}>Personal Information</Text>
+                <Text style={styles.subText}>Let's complete your profile.</Text>
                 <TouchableOpacity style={styles.topView} onPress={onToggle}>
                     <View style={styles.insideView}>
                         <View>
@@ -129,7 +129,7 @@ const OnBoardPhoto = (props) => {
                     </TouchableOpacity>
                     <Text style={styles.uploadSub}>Upload a photo under 2 MB</Text>
                 </Center> */}
-                 <MyTextInput
+                 {/* <MyTextInput
                         containerStyle={{ marginVertical: spacing.small,marginTop:spacing.extraLarge }}
                         //iconName={"lock-outline"}
                         placeholder={"Address"}
@@ -143,7 +143,7 @@ const OnBoardPhoto = (props) => {
                         value={contact}
                         onChangeText={(txt) => setContact(txt)}
                         keyboardType="number-pad"
-                    />
+                    /> */}
                 <MyButton
                     title={"Done"}
                     txtStyle={{ color: "white" }}

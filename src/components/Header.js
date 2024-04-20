@@ -32,7 +32,9 @@ const Header = ({
   rightIconColor,
   onBackPress,
   rightIsComponent,
-  rightIsSupplier
+  rightIsSupplier,
+  normalBack,
+  titleStyle
 }) => {
   const insets = useSafeAreaInsets();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,8 +64,22 @@ const Header = ({
     //userData.share
   }
   return (
-    <View style={[styles.container, extraStyle, {paddingTop: Platform.OS == "ios"?insets.top:insets.top+15}]}>
+    <View style={[styles.container, extraStyle, {paddingTop: Platform.OS == "ios"?insets.top:insets.top+15},normalBack&&{paddingLeft:0}]}>
       {back ? (
+        normalBack?
+        <IconButton
+          onPress={onBackPress ? onBackPress : handleBack}
+          _pressed={{backgroundColor: 'transparent'}}
+          //style={{backgroundColor:"white",borderRadius:30}}
+          icon={
+            <Icon
+              as={Ionicons}
+              size="lg"
+              name="arrow-back"
+              color={colors.black}
+            />
+          }
+        />:
         <IconButton
           onPress={onBackPress ? onBackPress : handleBack}
           _pressed={{backgroundColor: 'transparent'}}
@@ -99,7 +115,7 @@ const Header = ({
           />
         </HStack>
       ) : (
-        <Text style={[styles.title, back && {marginLeft: -5}]}>{title}</Text>
+        <Text style={[styles.title, back && {marginLeft: -5},titleStyle]}>{title}</Text>
       )}
       {rightIcon ? (
         rightIsComponent ? (
@@ -108,12 +124,12 @@ const Header = ({
             placement="bottom right"
             trigger={triggerProps => {
               return (
-                <Pressable {...triggerProps} style={{backgroundColor:"black",borderRadius:30,width:40,height:40,justifyContent:"center",alignItems:'center'}}>
+                <Pressable {...triggerProps} style={{width:40,height:40,justifyContent:"center",alignItems:'center'}}>
                   <Icon
                     as={MaterialCommunityIcons}
                     size="lg"
                     name={"dots-vertical"}
-                    color={'white'}
+                    color={'black'}
                 />
                 </Pressable>
               );
@@ -124,7 +140,7 @@ const Header = ({
         ) : (
           <IconButton
             //bgColor={"red.100"}
-            style={{backgroundColor:"black",borderRadius:30}}
+            // style={{backgroundColor:"black",borderRadius:30}}
             onPress={onRightIconPress}
             _pressed={{backgroundColor: 'transparent'}}
             icon={
@@ -132,7 +148,7 @@ const Header = ({
                 as={Ionicons}
                 size="lg"
                 name={rightIcon}
-                color={'white'}
+                color={'black'}
               />
             }
           />
@@ -160,7 +176,7 @@ const styles = StyleSheet.create({
     //flex:1,
     //textAlign:"center",
     color: 'black',
-    fontFamily: fonts.bold,
+    fontFamily: fonts.medium,
     fontSize: fontSizes.medium,
     flex: 1,
     marginLeft: 40,

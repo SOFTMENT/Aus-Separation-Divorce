@@ -6,7 +6,7 @@ import colors from "../../theme/colors";
 
 export default StyleSheet.create({
     settingsText:{
-        backgroundColor:"black",
+        backgroundColor:colors.appPrimary,
         paddingVertical:Platform.OS=="ios"?spacing.semiMedium:spacing.small,
         paddingLeft:spacing.medium,
         fontSize:responsiveSize(13),
@@ -17,8 +17,10 @@ export default StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
        //backgroundColor:"red",
-        marginVertical:Platform.OS=="ios"?spacing.mediumLarge:spacing.medium,
-        paddingHorizontal:spacing.mediumLarge
+        paddingVertical:Platform.OS=="ios"?spacing.mediumLarge:spacing.medium,
+        marginHorizontal:spacing.mediumLarge,
+        borderBottomWidth:1,
+        borderBottomColor:"#E6E6E6"
      },
      subMenuImage:{
         width:itemSizes.item20,

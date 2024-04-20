@@ -1,48 +1,59 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Icon } from 'native-base';
 import React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
-import Ionicons from "react-native-vector-icons/Ionicons";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import fonts from '../../assets/fonts';
+import CategoryIcon from '../assets/svgs/category.svg';
+import HomeIcon from '../assets/svgs/home.svg';
+import ProfileIcon from '../assets/svgs/profile.svg';
+import SearchIcon from '../assets/svgs/search.svg';
 import { fontSizes } from '../common/variables';
 import Chat from '../screens/Chat';
 import Inbox from '../screens/Inbox';
-import SearchScreen from '../screens/SearchScreen';
-import AdvertiserDetail from '../screens/UserScreens/ListingDetail';
-import UserHome from '../screens/UserScreens/AdvertiserHome';
-import AdvertiserOrderDetails from '../screens/UserScreens/AdvertiserOrderDetails';
-import AdvertiserOrders from '../screens/UserScreens/AdvertiserOrders';
-import AdvertiserProfile from '../screens/UserScreens/AdvertiserProfile';
-import CategoryScreen from '../screens/UserScreens/CartegoryScreen';
-import FavoritesScreen from '../screens/UserScreens/FavoritesScreen';
-import PaymentScreen from '../screens/UserScreens/PaymentScreen';
-import ServiceProviderProfiles from '../screens/UserScreens/ServiceProviderProfiles';
-import colors from '../theme/colors';
-import HomeIcon from '../assets/svgs/home.svg'
-import LocationSelectorScreen from '../screens/UserScreens/LocationSelectorScreen';
-import MyListingScreenUser from '../screens/UserScreens/MyListingScreenUser';
-import ListingDetail from '../screens/UserScreens/ListingDetail';
-import ListingBySupplier from '../screens/UserScreens/ListingBySupplier';
 import NotificationScreen from '../screens/NotificationScreen';
-import UserSearchHistory from '../screens/UserScreens/UserSearchHistory';
+import SearchScreen from '../screens/SearchScreen';
+import UserProfile from '../screens/UserScreens/UserProfile';
+import ListingDetail from '../screens/UserScreens/ListingDetail';
+import LocationSelectorScreen from '../screens/UserScreens/LocationSelectorScreen';
+import UserHome from '../screens/UserScreens/UserHome';
+import colors from '../theme/colors';
+import CategoryScreen from '../screens/UserScreens/CartegoryScreen';
+import AdvertisersByCategory from '../screens/UserScreens/AdvertisersByCategory';
 const Tab = createBottomTabNavigator();
 const AdHomeStack = createNativeStackNavigator()
 const AdOrderStack = createNativeStackNavigator()
 const InboxStack = createNativeStackNavigator()
 const ProfileStack = createNativeStackNavigator()
-const FavoriteStack = createNativeStackNavigator()
-const MyFavoriteStack = () => {
+const CategoryStack = createNativeStackNavigator()
+const SearchStack = createNativeStackNavigator()
+
+const MySeachStack = () => {
     return(
-        <FavoriteStack.Navigator
+        <SearchStack.Navigator
             screenOptions={{
                 headerShown:false
             }}
         >
-            <FavoriteStack.Screen name='Favorite' component={FavoritesScreen}/>
-            <FavoriteStack.Screen name='ListingDetail' component={ListingDetail}/>
-        </FavoriteStack.Navigator>
+            <SearchStack.Screen name='SearchScreen' component={SearchScreen}/>
+            <SearchStack.Screen name='ListingDetail' component={ListingDetail}/>
+
+            {/* <ProfileStack.Screen name='NotificationScreen' component={NotificationScreen}/> */}
+        </SearchStack.Navigator>
+    )
+}
+const MyCategoryStack = () => {
+    return(
+        <CategoryStack.Navigator
+            screenOptions={{
+                headerShown:false
+            }}
+        >
+            <CategoryStack.Screen name='CategoryScreen' component={CategoryScreen}/>
+            <CategoryStack.Screen name='AdvertisersByCategory' component={AdvertisersByCategory}/>
+            <CategoryStack.Screen name='ListingDetail' component={ListingDetail}/>
+
+            {/* <ProfileStack.Screen name='NotificationScreen' component={NotificationScreen}/> */}
+        </CategoryStack.Navigator>
     )
 }
 const MyProfileStack = () => {
@@ -52,7 +63,7 @@ const MyProfileStack = () => {
                 headerShown:false
             }}
         >
-            <ProfileStack.Screen name='ProfileScreen' component={AdvertiserProfile}/>
+            <ProfileStack.Screen name='ProfileScreen' component={UserProfile}/>
             <ProfileStack.Screen name='NotificationScreen' component={NotificationScreen}/>
         </ProfileStack.Navigator>
     )
@@ -76,42 +87,24 @@ const MyAdHomeStack = () => {
                 headerShown:false
             }}
         >
-            <AdHomeStack.Screen name='AdHome' component={UserHome}/>
-            <AdHomeStack.Screen name='MyListingScreenUser' component={MyListingScreenUser}/>
+            <AdHomeStack.Screen name='UserHome' component={UserHome}/>
             <AdHomeStack.Screen name='LocationSelectorScreen' component={LocationSelectorScreen}/>
             <AdHomeStack.Screen name='ListingDetail' component={ListingDetail}/>
-            <AdHomeStack.Screen name='ListingBySupplier' component={ListingBySupplier}/>
             <AdOrderStack.Screen name='PersonalChat' component={Chat}/>
-            <AdHomeStack.Screen name='CategoryScreen' component={CategoryScreen}/>
-            <AdHomeStack.Screen name='PaymentScreen' component={PaymentScreen}/>
-            <AdHomeStack.Screen name='SearchScreen' component={SearchScreen}/>
-            <AdHomeStack.Screen name='ServiceProviderProfiles' component={ServiceProviderProfiles}/>
-            <AdHomeStack.Screen name='UserSearchHistory' component={UserSearchHistory}/>
+            <AdHomeStack.Screen name='AdvertisersByCategory' component={AdvertisersByCategory}/>
         </AdHomeStack.Navigator>
     )
 }
-const MyAdOrderStack = () => {
-    return(
-        <AdOrderStack.Navigator
-            screenOptions={{
-                headerShown:false
-            }}
-        >
-            <AdOrderStack.Screen name='AdOrder' component={AdvertiserOrders}/>
-            
-            <AdOrderStack.Screen name='AdvertiserOrderDetails' component={AdvertiserOrderDetails}/>
-        </AdOrderStack.Navigator>
-    )
-}
+
 function UserBottomTab() {
     return (
         <Tab.Navigator
             screenOptions={{
                 //tabBarHideOnKeyboard:true,
                 headerShown: false,
-                tabBarShowLabel: false,
+                tabBarShowLabel: true,
                 tabBarStyle: {
-                    backgroundColor: colors.black,
+                    backgroundColor: colors.white,
                     borderTopWidth: 0,
                     paddingBottom:Platform.OS == 'android' ? 7:15,
                     height:Platform.OS =="android"?60:70,
@@ -127,16 +120,17 @@ function UserBottomTab() {
                     
                 },
                 tabBarLabelStyle : {
-                    fontFamily:fonts.bold,
+                    fontFamily:fonts.regular,
                     fontSize:fontSizes.extraExtraSmall
                 },
-                tabBarActiveTintColor: colors.appDefaultColor,
-                tabBarInactiveTintColor: "white",
+                tabBarActiveTintColor: colors.appPrimary,
+                tabBarInactiveTintColor: "#8B8B8B",
             }}
         >
             <Tab.Screen name="Home" component={MyAdHomeStack}
                 options={{
                     tabBarIcon: ({ color, size }) => {
+                        console.log(color)
                         return (
                             <View style={[styles.activeBackground,{backgroundColor:colors.appDefaultColor == color?"white":"transparent"}]}>
                                 <HomeIcon width={size} height={size} fill={color}/>
@@ -146,33 +140,25 @@ function UserBottomTab() {
                 }}
             />
 
-            <Tab.Screen name="FavoritesScreen" component={MyFavoriteStack}
+            <Tab.Screen name="Search" component={MySeachStack}
                 options={{
+                    title:"Search",
                     tabBarIcon: ({ color, size }) => {
                         return (
                             <View style={[styles.activeBackground,{backgroundColor:colors.appDefaultColor == color?"white":"transparent"}]}>
-                            <Icon
-                                as={MaterialCommunityIcons}
-                                name='heart'
-                                color={color}
-                                size={size}
-                            />
+                             <SearchIcon width={size} height={size} fill={color}/>
                             </View>
                         )
                     }
                 }}
             />
-            <Tab.Screen name="Chats" component={MyInboxStack}
+            <Tab.Screen name="CategoryStack" component={MyCategoryStack}
                 options={{
+                    title:'Category',
                     tabBarIcon: ({ color, size }) => {
                         return (
                             <View style={[styles.activeBackground,{backgroundColor:colors.appDefaultColor == color?"white":"transparent"}]}>
-                            <Icon
-                                as={MaterialCommunityIcons}
-                                name='email'
-                                color={color}
-                                size={size}
-                            />
+                            <CategoryIcon width={size} height={size} fill={color}/>
                             </View>
                         )
                     }
@@ -180,15 +166,11 @@ function UserBottomTab() {
             />
             <Tab.Screen name="Setting" component={MyProfileStack}
                 options={{
+                    title:'Profile',
                     tabBarIcon: ({ color, size }) => {
                         return (
                             <View style={[styles.activeBackground,{backgroundColor:colors.appDefaultColor == color?"white":"transparent"}]}>
-                            <Icon
-                                as={MaterialCommunityIcons}
-                                name='account'
-                                color={color}
-                                size={size}
-                            />
+                            <ProfileIcon width={size} height={size} fill={color}/>
                             </View>
                         )
                     }

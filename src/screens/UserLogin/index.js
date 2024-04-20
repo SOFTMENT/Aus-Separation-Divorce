@@ -228,7 +228,6 @@ const UserLogin = (props) => {
             })
     }
     const setUserData = async (fullName) => {
-        console.log(fullName)
         const user = auth().currentUser
         //console.log(user)
         try {

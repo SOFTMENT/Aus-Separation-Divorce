@@ -18,7 +18,9 @@ export default StyleSheet.create({
         color:colors.black,
         fontFamily:fonts.medium,
         fontSize:fontSizes.small,
-        marginBottom:20
+        marginBottom:20,
+        marginLeft:5,
+        
     },
     catText:{
         fontFamily:fonts.regular,

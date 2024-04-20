@@ -7,7 +7,7 @@ export default {
     appDefaultColor:"#E50101",
     appSecondary:'#FD6B68',
     appPrimaryDark:'#3A6AB4',
-    appPrimaryLight:'#e0ebfc',
+    appPrimaryLight:'#EEF8F8',
     blackText:'#333',
     borderColor:'rgba(151, 151, 151, 0.58)',
     btnColor:'#B9296A',

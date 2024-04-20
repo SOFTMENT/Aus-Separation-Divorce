@@ -4,7 +4,7 @@ import { Keyboard, Platform, TouchableOpacity, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore, { firebase } from '@react-native-firebase/firestore';
 import algoliasearch from 'algoliasearch';
-import { FlatList, HStack, IconButton, Input } from 'native-base';
+import { FlatList, HStack, Icon, IconButton, Input } from 'native-base';
 import { Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,9 +16,10 @@ import { setUserData } from '../../store/userSlice';
 import colors from '../../theme/colors';
 import UserProductCard from '../UserScreens/UserProductCard';
 import styles from './styles';
+import NearbyHome from '../UserScreens/UserHome/NearbyHome';
 const algoliaClient = algoliasearch(
-  'MOMHBUJFM8',
-  '110bf4874cab087690527dec42643d51',
+  'YFTO9FO5UP',
+  'f3aaba9b45b2d0c4a9edb1207e5be773',
 );
 const index = algoliaClient.initIndex('title');
 let firstLoad = true;
@@ -51,38 +52,7 @@ const SearchScreen = props => {
   const handleProfile = () => {
     onToggle();
   };
-  const updateSearchHistory = (term) => {
-    let searchArray = Array.isArray(userData?.searchHistory)? Array.from(userData.searchHistory) : []
-    const index = searchArray.indexOf(term);
-    if (index !== -1) {
-      // If the element exists in the array, remove it and push it to the front.
-      searchArray.splice(index, 1); // Remove the element.
-      searchArray.unshift(term);   // Push it to the front.
-    }
-    else
-    searchArray.push(term)
-    // Ensure the array contains a maximum of 5 terms.
-    if (searchArray.length > 5) {
-      searchArray.shift(); // Remove the oldest term from the beginning of the array.
-    }
-    try {
-      firestore()
-      .collection("Users")
-      .doc(auth().currentUser.uid)
-      .update({
-        searchHistory:searchArray
-      })
-      .then(()=>{
-        getUserData()
-      })
-    } catch (error) {
-      
-    }
-  }
-  const handleRecent = term => {
-    setValue(term)
-    search(term)
-  }
+  
   const search = (term) => {
     Keyboard.dismiss()
     if(term.trim() == ""){
@@ -92,53 +62,29 @@ const SearchScreen = props => {
     setLoading(true);
     // updateSearchHistory(term)
     index
-      .search(term,{
-        aroundLatLng: `${latitude},${longitude}`,
-        aroundRadius: 60,
-      } )
+      .search(term, )
       .then(({hits}) => {
         if (hits.length == 0) setNoData(true);
         else setNoData(false);
-        setHits(hits);
-        if(hits.length >0){
-          handleSearchHistory(hits,term)
-        }
+        hits.map(hit=>console.log(hit))
+        setHits(hits.filter(hit=>hit.membershipActive));
+        // if(hits.length >0){
+        //   handleSearchHistory(hits,term)
+        // }
       })
       .finally(() => {
         setLoading(false);
       });
   };
-  const handleSearchHistory = (hits,term) => {
-    try {
-      const listingIds = hits.map((hit)=>hit.id)
-      firestore()
-      .collection("Users")
-      .doc(auth().currentUser.uid)
-      .collection("SearchHistory")
-      .add({
-        searchTime:firebase.firestore.FieldValue.serverTimestamp(),
-        listingIds,
-        term
-      })
-    } catch (error) {
-      
-    }
-  }
   const renderCard = ({item}) => {
-    return (
-      <UserProductCard
-        item={item}
-        favorites={favorites}
-        navigation={navigation}
-      />
-    );
+    return <NearbyHome item={item} navigation={navigation} />;
   };
   const keyExtractor = item => {
     return item.id;
   };
   return (
     <View style={styles.container}>
-      <Header navigation={navigation} title="Search" back />
+      <Header navigation={navigation} title="Search"/>
       <View style={styles.mainView}>
         <HStack space={2} mb={5} px={5}>
           <Input
@@ -146,13 +92,15 @@ const SearchScreen = props => {
             variant="outlined"
             flex={1}
             // ref={textInputRef}
-            _focus={{borderColor: colors.appDefaultColor}}
-            borderRadius={30}
-            bgColor={'white'}
+            InputLeftElement={
+              <Icon as={MaterialCommunityIcons} size="lg" name="magnify" mx={3} />
+            }
+            _focus={{borderWidth: 0}}
+            borderRadius={10}
+            bgColor={'rgb(230,230,230)'}
             py={Platform.OS == 'ios' ? 4 : 2}
             color={'black'}
             borderWidth={1}
-            borderColor={colors.appDefaultColor}
             //bg={"gray.800"}
             onChangeText={txt => setValue(txt)}
             value={value}
@@ -169,7 +117,7 @@ const SearchScreen = props => {
           />
           <IconButton
             //variant={"solid"}
-            bg={colors.black}
+            bg={colors.appPrimary}
             px={3}
             borderRadius={10}
             // borderWidth={1}
@@ -183,11 +131,11 @@ const SearchScreen = props => {
             }}
           />
         </HStack>
-        <TouchableOpacity onPress={()=>{
+        {/* <TouchableOpacity onPress={()=>{
           navigation.navigate("UserSearchHistory")
         }}>
           <Text style={styles.recentSearch}>Show Search History</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {/* { userData?.searchHistory && userData?.searchHistory?.length > 0 && isFocus &&
           <View style={styles.searchHistory}>
           <Text style={styles.recentSearch}>RECENT SEARCHES</Text>

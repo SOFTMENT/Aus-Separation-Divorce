@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008.apps.googleusercontent.com</string>
+	<string>986930678283-dm9hnuatjbk2qfs97q0tffagtfbrhe3g.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008</string>
+	<string>com.googleusercontent.apps.986930678283-dm9hnuatjbk2qfs97q0tffagtfbrhe3g</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>986930678283-e3uqu9ubij0jdv73k8ler1aq2glk4bn5.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>in.softment.ausseprationdivorce</string>
+	<string>com.hjmt.ausseprationdivorce</string>
 	<key>PROJECT_ID</key>
 	<string>aus-sepration-divorce</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:986930678283:ios:e17319ef1ff6013642950e</string>
+	<string>1:986930678283:ios:f326597ef492b49a42950e</string>
 </dict>
 </plist>

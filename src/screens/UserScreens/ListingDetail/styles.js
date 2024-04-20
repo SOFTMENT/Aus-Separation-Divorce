@@ -10,37 +10,40 @@ const styles =  StyleSheet.create({
         backgroundColor:colors.backgroundColor
     },
     imageContainerSmall:{
-        borderRadius:spacing.small,
-        backgroundColor:"rgba(255,255,255,0.9)",
-        padding:spacing.small,
-        marginHorizontal:3
+        borderRadius:spacing.medium,
     },
     imageContainer:{
-        paddingVertical:spacing.large,
+        //paddingVertical:spacing.large,
         borderRadius:spacing.large,
-        backgroundColor:"rgba(255,0,0,0.1)",
-        marginHorizontal:spacing.medium
+        marginHorizontal:spacing.medium,
+        marginTop:10,
+        flexDirection:"row",
+        alignItems:"center"
     },
     imageSmall:{
-        width:70,
-        aspectRatio:1,
-        borderRadius:spacing.extraSmall,
+        aspectRatio:16/9,
+        borderRadius:spacing.semiMedium,
+    },
+    profileImage:{
+        width:80,
+        height:80,
+        borderRadius:50
     },
     image:{
-        width: "80%", aspectRatio: 1,
+        width: "100%", aspectRatio: 16 / 9,
         borderRadius:spacing.medium,
-        alignSelf:"center"
         //overflow:"hidden"
     },
     title:{
         color:"black",
         fontSize:fontSizes.small,
         fontFamily:fonts.bold,
-        marginTop:20
+        textAlign:'left',
+        marginLeft:10
     },
     subtitle:{
-        color:"black",
-        fontSize:fontSizes.extraExtraSmall,
+        color:"#7E7D7D",
+        fontSize:fontSizes.extraSmall,
         fontFamily:fonts.regular
     },
     supplier:{
@@ -50,25 +53,39 @@ const styles =  StyleSheet.create({
     },
     des:{
         color:"black",
-        fontSize:fontSizes.extraSmall,
-        fontFamily:fonts.semiBold,
+        fontSize:fontSizes.small,
+        fontFamily:fonts.medium,
         marginTop:20
     },
     about:{
-        color:"black",
-        fontSize:responsiveSize(11),
-        fontFamily:fonts.medium,
+        color:"#A7A7A7",
+        fontSize:responsiveSize(12),
+        fontFamily:fonts.regular,
         lineHeight:20
     },
     desView:{
-        padding:spacing.medium,
-        backgroundColor:"rgba(255,0,0,0.1)",
+        // padding:spacing.medium,
+        // backgroundColor:"rgba(255,0,0,0.1)",
         marginTop:10,
-        borderRadius:spacing.small
+        // borderRadius:spacing.small
     },
     btn:{
         position:"absolute",
         bottom:10
+    },
+    backImage:{
+        width:"100%",
+        aspectRatio:16/9,
+        // borderRadius:20,
+        borderTopEndRadius:40,
+        borderTopStartRadius:40,
+    },
+    moreText:{
+        position:"absolute",
+        fontFamily:fonts.medium,
+        color:"black",
+        right:20,
+        bottom:20,
     }
 })
 export default styles

@@ -33,6 +33,8 @@ import UserBottomTab from './UserBottomTab';
 import VendorBottomTab from './VendorBottomTab';
 import AdvertiserOnboardCategory from '../screens/AdvertiserOnboardingScreens/AdvertiserOnboardCategory';
 import AdvertiserOnboardSubcategory from '../screens/AdvertiserOnboardingScreens/AdvertiserOnboardSubcategory';
+import AddAdvertiserProfile from '../screens/AdvertiserOnboardingScreens/AddAdvertiserProfile';
+import AdvertiserMembership from '../screens/AdvertiserOnboardingScreens/AdvertiserMembership';
 
 const Stack = createNativeStackNavigator();
 // const ServiceStack = createNativeStackNavigator()
@@ -110,6 +112,8 @@ const AppNavigator = () => {
                 <Stack.Screen name='OnBoardPhoto' component={OnBoardPhoto}/>
                 <Stack.Screen name='AdvertiserOnboardCategory' component={AdvertiserOnboardCategory}/>
                 <Stack.Screen name='AdvertiserOnboardSubcategory' component={AdvertiserOnboardSubcategory}/>
+                <Stack.Screen name='AddAdvertiserProfile' component={AddAdvertiserProfile}/>
+                <Stack.Screen name='AdvertiserMembership' component={AdvertiserMembership}/>
                 {/* <Stack.Screen name='ServiceHomeStack' component={MyServiceStack}/> */}
                 <Stack.Screen name='AdminScreen' component={AdminScreen} />
                 {/* <Stack.Screen name='UserSelectScreen' component={UserSelectScreen} />

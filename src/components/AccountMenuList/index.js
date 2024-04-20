@@ -286,15 +286,16 @@ export default AccountMenuList = (props) => {
                         <View key={item.id}>
                             {item.label&& <Text style={styles.settingsText}>{item.label}</Text>}
                             {
-                                item.subMenu.map(subItem => {
+                                item.subMenu.map((subItem,index) => {
+                                    console.log(index,item.subMenu.length)
                                     return (
                                         <TouchableOpacity
-                                            style={styles.subMenu}
+                                            style={[styles.subMenu,index==item.subMenu.length-1&&{borderBottomWidth:0}]}
                                             onPress={subItem.onClick}
                                             key={subItem.label}
                                             disabled={loaderVisibility || subItem.disabled}
                                         >
-                                            <View style={{padding:4,justifyContent:"center",alignItems:'center',backgroundColor:'black',borderRadius:30}}>
+                                            {/* <View style={{padding:4,justifyContent:"center",alignItems:'center',backgroundColor:'black',borderRadius:30}}>
                                             <Icon
                                                 // style={styles.subMenuImage}
                                                 name={subItem.icon}
@@ -302,10 +303,10 @@ export default AccountMenuList = (props) => {
                                                 size={"md"}
                                                 color="white"
                                             />
-                                            </View>
+                                            </View> */}
                                             <View style={styles.subMenuContainer}>
                                                 <Text style={styles.subMenuTitle}>{subItem.label}</Text>
-                                                {
+                                                {/* {
                                                     subItem.subLabel &&
                                                     <View style={styles.subsubView}>
                                                         <Text style={styles.subsubtitle}>{subItem.subLabel}</Text>
@@ -320,7 +321,14 @@ export default AccountMenuList = (props) => {
                                                             />
                                                         }
                                                     </View>
-                                                }
+                                                } */}
+                                                <Icon
+                                                                // style={styles.subMenuImage}
+                                                                name={"chevron-forward-outline"}
+                                                                as={Ionicons}
+                                                                size={"sm"}
+                                                                color="#B0B0B0"
+                                                            />
                                             </View>
                                         </TouchableOpacity>
                                     )

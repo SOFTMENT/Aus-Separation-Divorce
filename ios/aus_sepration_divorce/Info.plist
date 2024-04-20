@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008</string>
+				<string>com.googleusercontent.apps.986930678283-dm9hnuatjbk2qfs97q0tffagtfbrhe3g</string>
 			</array>
 		</dict>
 	</array>
@@ -47,15 +47,15 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Australian requires media library access to upload picture</string>
+	<string>Australian Sepration, Divorce requires media library access to upload picture</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Australian requires camera access to upload profile picture</string>
+	<string>Australian Sepration, Divorce requires camera access to upload profile picture</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Australian requires location access to show nearby advertiser</string>
+	<string>Australian Sepration, Divorce requires location access to show nearby advertiser</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Australian requires location access to show nearby advertiser</string>
+	<string>Australian Sepration, Divorce requires location access to show nearby advertiser</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Australian requires photo library access to upload picture</string>
+	<string>Australian Sepration, Divorce requires photo library access to upload picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>

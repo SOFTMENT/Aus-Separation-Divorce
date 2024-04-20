@@ -109,6 +109,7 @@ const UserRegister = (props) => {
                     navigateAndReset("LoginScreen",{tab})
                 }
         } catch (error) {
+            console.log(error)
             if (error.code === 'auth/email-already-in-use') {
                 Util.showMessage("error", "Error", 'That email address is already in use!');
             }

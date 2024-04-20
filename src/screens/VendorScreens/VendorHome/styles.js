@@ -1,126 +1,91 @@
-import {StyleSheet} from 'react-native';
-import fonts from '../../../../assets/fonts';
-import {fontSizes, spacing} from '../../../common/variables';
-import colors from '../../../theme/colors';
-import Util, { responsiveSize } from '../../../common/util';
+import { StyleSheet } from "react-native";
+import fonts from "../../../../assets/fonts";
+import { responsiveSize } from "../../../common/util";
+import { fontSizes, spacing } from "../../../common/variables";
+import colors from "../../../theme/colors";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: spacing.mediumLarge,
-    backgroundColor: colors.backgroundColor,
-  },
-  topView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  hello: {
-    color: 'black',
-    fontSize: fontSizes.small,
-    fontFamily: fonts.medium,
-  },
-  name: {
-    color: 'black',
-    fontSize: fontSizes.medium,
-    fontFamily: fonts.bold,
-  },
-  title: {
-    fontSize: fontSizes.extraSmall,
-    color: colors.btnColor,
-    fontFamily: fonts.semiBold,
-  },
-  borderViewContainer: {
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginVertical: 20,
-    //backgroundColor:'red'
-  },
-  borderView: {
-    height: 0.5,
-    flex: 1,
-    // width:"100%",
-    backgroundColor: 'gray',
-  },
-  or: {
-    color: colors.black,
-    textAlign: 'center',
-    marginVertical: spacing.large,
-    fontFamily: fonts.bold,
-    fontSize: fontSizes.extraExtraSmall,
-    marginHorizontal: spacing.extraExtraSmall,
-  },
-  searchContainer:{
-    backgroundColor:colors.white,
-    flexDirection:"row",
-    alignItems:"flex-start",
-    paddingHorizontal:10,
-    borderRadius:20,
-    borderWidth:1,
-    borderColor:colors.borderColor
-  },
-  autoCompleteStyles: {
-    container: {
-      borderRadius: spacing.small,
-      borderWidth: 1,
-      //backgroundColor:"green",
-      paddingHorizontal: spacing.extraSmall,
-      marginRight: spacing.semiMedium,
-      borderColor: colors.borderColor,
-      zIndex: 1000,
-      height:100,
-      //alignItems: "center",
+const styles =  StyleSheet.create({
+    container:{
+        flex:1,
+        backgroundColor:colors.backgroundColor
     },
-    textInput: {
-      backgroundColor: 'transparent',
-      color: 'black',
-      fontFamily: fonts.regular,
-      fontSize: responsiveSize(12),
-      height:100,
+    imageContainerSmall:{
+        borderRadius:spacing.medium,
     },
-    listView: {
-      width: Util.getWidth(82),
-      backgroundColor: colors.backgroundColor,
-      padding: spacing.medium,
-      paddingBottom: 10,
-      borderRadius: spacing.extraExtraSmall,
-      position: 'absolute',
-      top: Util.getHeight(6),
-      left: -2,
-      zIndex: 1000,
+    imageContainer:{
+        //paddingVertical:spacing.large,
+        borderRadius:spacing.large,
+        marginHorizontal:spacing.medium,
+        marginTop:10,
+        flexDirection:"row",
+        alignItems:"center"
     },
-    separator: {
-      backgroundColor: 'gray',
+    imageSmall:{
+        aspectRatio:16/9,
+        borderRadius:spacing.semiMedium,
     },
-    row: {
-      backgroundColor: 'white',
-      color: 'black',
-      borderRadius: spacing.extraSmall,
-      marginBottom: spacing.extraSmall,
-      paddingHorizontal: 10,
-      zIndex: 1000,
+    profileImage:{
+        width:80,
+        height:80,
+        borderRadius:50
     },
-    description: {
-      color: 'black',
-      fontSize: responsiveSize(12),
-      noWrap: true,
+    image:{
+        width: "100%", aspectRatio: 16 / 9,
+        borderRadius:spacing.medium,
+        //overflow:"hidden"
     },
-    
-    placeholder: {
-      color: 'black',
-      fontSize: fontSizes.extraExtraSmall,
-      fontFamily: fonts.regular,
+    title:{
+        color:"black",
+        fontSize:fontSizes.small,
+        fontFamily:fonts.bold,
+        textAlign:'left',
+        marginLeft:10
     },
-  },
-  searchBox: {
-    backgroundColor: '#EEEDED',
-    borderRadius: spacing.large,
-    padding: spacing.medium,
-    marginVertical: spacing.medium,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-});
-export default styles;
+    subtitle:{
+        color:"#7E7D7D",
+        fontSize:fontSizes.extraSmall,
+        fontFamily:fonts.regular
+    },
+    supplier:{
+        color:"#898B91",
+        fontSize:fontSizes.extraExtraSmall,
+        fontFamily:fonts.regular
+    },
+    des:{
+        color:"black",
+        fontSize:fontSizes.small,
+        fontFamily:fonts.medium,
+        marginTop:20
+    },
+    about:{
+        color:"#A7A7A7",
+        fontSize:responsiveSize(12),
+        fontFamily:fonts.regular,
+        lineHeight:20
+    },
+    desView:{
+        // padding:spacing.medium,
+        // backgroundColor:"rgba(255,0,0,0.1)",
+        marginTop:10,
+        // borderRadius:spacing.small
+    },
+    btn:{
+        position:"absolute",
+        bottom:10
+    },
+    backImage:{
+        width:"100%",
+        aspectRatio:16/9,
+        // borderRadius:20,
+        borderTopEndRadius:40,
+        borderTopStartRadius:40,
+    },
+    moreText:{
+        position:"absolute",
+        fontFamily:fonts.medium,
+        color:"black",
+        right:20,
+        bottom:20,
+    }
+})
+export default styles

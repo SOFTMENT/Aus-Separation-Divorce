@@ -12,10 +12,10 @@ import Inbox from '../screens/Inbox';
 import AccountDetailsScreen from '../screens/VendorScreens/AccountDetailsScreen';
 import MyListingScreen from '../screens/VendorScreens/MyListingScreen';
 import VendorHome from '../screens/VendorScreens/VendorHome';
-import VendorProfile from '../screens/VendorScreens/VendorProfile';
+import AdvertiserProfile from '../screens/VendorScreens/AdvertiserProfile';
 import colors from '../theme/colors';
 import AddListing from '../screens/VendorScreens/AddListing';
-import EditListing from '../screens/VendorScreens/EditListing';
+import EditAdvertiser from '../screens/VendorScreens/EditAdvertiser';
 import NotificationScreen from '../screens/NotificationScreen';
 import VendorAllListing from '../screens/VendorScreens/VendorAllListing';
 import VendorListingDetail from '../screens/VendorScreens/VendorListingDetail';
@@ -32,8 +32,8 @@ const MyVendorProfileStack = () => {
         headerShown: false,
       }}>
       <VendorProfileStack.Screen
-        name="VendorProfile"
-        component={VendorProfile}
+        name="AdvertiserProfile"
+        component={AdvertiserProfile}
       />
             <VendorProfileStack.Screen name='NotificationScreen' component={NotificationScreen}/>
 
@@ -64,7 +64,7 @@ const MyVendorHomeStack = () => {
       <VendorHomeStack.Screen name="PersonalChat" component={Chat} />
       <VendorHomeStack.Screen name="MyListingScreen" component={MyListingScreen} />
       <VendorHomeStack.Screen name="VendorAllListing" component={VendorAllListing} />
-      <VendorHomeStack.Screen name="EditListing" component={EditListing} />
+      <VendorHomeStack.Screen name="EditAdvertiser" component={EditAdvertiser} />
       <VendorHomeStack.Screen name='LocationSelectorScreen' component={LocationSelectorScreen}/>
 
     </VendorHomeStack.Navigator>
@@ -86,30 +86,32 @@ const MyInboxStack = () => {
 function VendorBottomTab() {
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        //tabBarHideOnKeyboard:true,
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: colors.black,
+    screenOptions={{
+      //tabBarHideOnKeyboard:true,
+      headerShown: false,
+      tabBarShowLabel: true,
+      tabBarStyle: {
+          backgroundColor: colors.white,
           borderTopWidth: 0,
-          paddingBottom: Platform.OS == 'android' ? 7 : 15,
-          height: Platform.OS == 'android' ? 60 : 70,
+          paddingBottom:Platform.OS == 'android' ? 7:15,
+          height:Platform.OS =="android"?60:70,
           shadowOffset: {
-            width: 20,
-            height: 20,
+              width: 20,
+              height: 20,
           },
           shadowOpacity: 0.58,
           shadowRadius: 16.0,
           elevation: 24,
-        },
-        tabBarIconStyle: {},
-        tabBarLabelStyle: {
-          fontFamily: fonts.bold,
-          fontSize: fontSizes.extraExtraSmall,
-        },
-        tabBarActiveTintColor: colors.appDefaultColor,
-        tabBarInactiveTintColor: "white",
+      },
+      tabBarIconStyle : {
+          
+      },
+      tabBarLabelStyle : {
+          fontFamily:fonts.regular,
+          fontSize:fontSizes.extraExtraSmall
+      },
+      tabBarActiveTintColor: colors.appPrimary,
+      tabBarInactiveTintColor: "#8B8B8B",
       }}>
       <Tab.Screen
         name="Home"
@@ -132,58 +134,9 @@ function VendorBottomTab() {
         }}
       />
 
+      
       <Tab.Screen
-        name="AddListings"
-        component={MyVendorAddListing}
-        options={{
-          tabBarIcon: ({color, size}) => {
-            return (
-              <View
-                style={[
-                  styles.activeBackground,
-                  {
-                    backgroundColor:
-                      colors.appDefaultColor == color ? 'white' : 'transparent',
-                  },
-                ]}>
-                <Icon
-                  as={MaterialCommunityIcons}
-                  name="plus-box-multiple"
-                  color={color}
-                  size={size}
-                />
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Chats"
-        component={MyInboxStack}
-        options={{
-          tabBarIcon: ({color, size}) => {
-            return (
-              <View
-                style={[
-                  styles.activeBackground,
-                  {
-                    backgroundColor:
-                      colors.appDefaultColor == color ? 'white' : 'transparent',
-                  },
-                ]}>
-                <Icon
-                  as={MaterialCommunityIcons}
-                  name="forum"
-                  color={color}
-                  size={size}
-                />
-              </View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Setting"
+        name="Profile"
         component={MyVendorProfileStack}
         options={{
           tabBarIcon: ({color, size}) => {

@@ -10,7 +10,7 @@ import AppRoot from './src';
 import { store } from './src/store';
 import fonts from './assets/fonts';
 GoogleSignin.configure({
-  iosClientId: "986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008.apps.googleusercontent.com",
+  iosClientId: "986930678283-dm9hnuatjbk2qfs97q0tffagtfbrhe3g.apps.googleusercontent.com",
   webClientId:"986930678283-3ennf744fbg23gu305t4hql9cvbqfp6n.apps.googleusercontent.com"
   // scopes:[
   //     `https://www.googleapis.com/auth/drive.readonly`,
@@ -20,9 +20,9 @@ GoogleSignin.configure({
   //     ],
 });
 const App = () => {
-  useEffect(() => {
-    messaging().onMessage(onMessageReceived);
-  }, [])
+  // useEffect(() => {
+  //   messaging().onMessage(onMessageReceived);
+  // }, [])
   async function onMessageReceived(message) {
     console.log(message)
     await notifee.requestPermission()

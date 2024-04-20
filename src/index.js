@@ -30,9 +30,9 @@ const toastConfig = {
       />
     ),
     btnToast: ({ text1, text2,props }) => (
-      <View style={{ height: 80, width: '90%', backgroundColor: 'white',marginHorizontal:spacing.small,borderRadius:spacing.small,padding:spacing.semiMedium,flexDirection:"row",justifyContent:"space-between",alignItems:"center",borderWidth:1,borderColor:colors.appDefaultColor}}>
+      <View style={{ height: 80, width: '90%', backgroundColor: 'white',marginHorizontal:spacing.small,borderRadius:spacing.small,padding:spacing.semiMedium,flexDirection:"row",justifyContent:"space-between",alignItems:"center",borderWidth:1,borderColor:colors.appPrimary}}>
         <View style={{width:"75%"}}>
-          <Text style={{fontFamily:fonts.semiBold,fontSize:fontSizes.extraExtraSmall,color:"#333"}}>{text1}</Text>
+          <Text style={{fontFamily:fonts.medium,fontSize:fontSizes.extraExtraSmall,color:"#333"}}>{text1}</Text>
           <Text style={{fontFamily:fonts.regular,fontSize:fontSizes.tiny,color:"grey",marginTop:spacing.extraExtraSmall}}>{text2}</Text>
         </View>
         <ClickableText

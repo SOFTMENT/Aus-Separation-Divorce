@@ -68,7 +68,7 @@ const HomeScreen = props => {
   }
   useEffect(() => {
     try {
-      requestUserPermission();
+      // requestUserPermission();
       firestore()
         .collection('Users')
         .doc(uid)
@@ -76,13 +76,13 @@ const HomeScreen = props => {
         .then(async user => {
           if (user.exists) {
             // await messaging().registerDeviceForRemoteMessages()
-            const token = await messaging().getToken()
-            firestore()
-            .collection("Users")
-            .doc(user.id)
-            .update({
-              fcmToken:token
-            })
+            // const token = await messaging().getToken()
+            // firestore()
+            // .collection("Users")
+            // .doc(user.id)
+            // .update({
+            //   fcmToken:token
+            // })
             const val = await AsyncStorage.getItem('userType');
             if (user.data().profileCompleted) {
               if (val == null || val == 'User') {
@@ -99,7 +99,7 @@ const HomeScreen = props => {
             } else {
               if (val == null || val == 'User') {
                 dispatch(setUserData({...user.data(), userType: 'User'}));
-                navigateAndReset('OnBoardPhoto');
+                navigateAndReset('UserBottomTab');
               } else if (val == 'Advertiser') {
                 dispatch(setUserData({...user.data(), userType: 'Advertiser'}));
                 navigateAndReset('AdvertiserOnboardCategory');
