@@ -59,7 +59,7 @@ const styles =  StyleSheet.create({
     },
     about:{
         color:"#A7A7A7",
-        fontSize:responsiveSize(12),
+        fontSize:fontSizes.extraSmall,
         fontFamily:fonts.regular,
         lineHeight:20
     },

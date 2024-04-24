@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import fonts from "../../../../assets/fonts";
-import Util from "../../../common/util";
+import Util, { responsiveSize } from "../../../common/util";
 import { fontSizes, spacing } from "../../../common/variables";
 import colors from "../../../theme/colors";
 
@@ -23,12 +23,12 @@ const styles =  StyleSheet.create({
     },
     hello:{
         color:"gray",
-        fontSize:fontSizes.small,
+        fontSize:responsiveSize(15),
         fontFamily:fonts.medium
     },
     name:{
         color:"black",
-        fontSize:fontSizes.medium,
+        fontSize:responsiveSize(16),
         fontFamily:fonts.medium
     },
     searchBox:{

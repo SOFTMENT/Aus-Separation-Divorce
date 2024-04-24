@@ -19,6 +19,7 @@ import UserHome from '../screens/UserScreens/UserHome';
 import colors from '../theme/colors';
 import CategoryScreen from '../screens/UserScreens/CartegoryScreen';
 import AdvertisersByCategory from '../screens/UserScreens/AdvertisersByCategory';
+import PDFViewer from '../screens/PDFViewer';
 const Tab = createBottomTabNavigator();
 const AdHomeStack = createNativeStackNavigator()
 const AdOrderStack = createNativeStackNavigator()
@@ -65,6 +66,7 @@ const MyProfileStack = () => {
         >
             <ProfileStack.Screen name='ProfileScreen' component={UserProfile}/>
             <ProfileStack.Screen name='NotificationScreen' component={NotificationScreen}/>
+            <ProfileStack.Screen name='PDFViewer' component={PDFViewer}/>
         </ProfileStack.Navigator>
     )
 }

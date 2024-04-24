@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:986930678283:android:cbe92dc8febecf9942950e",
+        "mobilesdk_app_id": "1:986930678283:android:b8e6066163b6f49e42950e",
         "android_client_info": {
-          "package_name": "in.softment.ausseprationdivorce"
+          "package_name": "com.hjmt.ausseprationdivorce"
         }
       },
       "oauth_client": [
         {
-          "client_id": "986930678283-e3uqu9ubij0jdv73k8ler1aq2glk4bn5.apps.googleusercontent.com",
+          "client_id": "986930678283-4u9vnovo3l05blfh86noru1eejdrnkhk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "in.softment.ausseprationdivorce",
+            "package_name": "com.hjmt.ausseprationdivorce",
             "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "986930678283-eb4dcnaft29gj154tmp3ek0fc8a2t008.apps.googleusercontent.com",
+              "client_id": "986930678283-dm9hnuatjbk2qfs97q0tffagtfbrhe3g.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "in.softment.ausseprationdivorce"
+                "bundle_id": "com.hjmt.ausseprationdivorce"
               }
             }
           ]

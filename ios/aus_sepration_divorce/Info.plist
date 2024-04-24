@@ -25,10 +25,38 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.hjmt.ausseprationdivorce</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ausseprationdivorce</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.986930678283-dm9hnuatjbk2qfs97q0tffagtfbrhe3g</string>
 			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Bundle Id</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.hjmt.ausseprationdivorce</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array/>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -79,5 +107,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>key_live_dAjVcG19LZh0xHTq1p7tFbjgtDm1yXGT</string>
+	</dict>
+	<key>branch_universal_link_domains</key>
+	<array>
+		<string>2xp9d.app.link</string>
+		<string>2xp9d-alternate.app.link</string>
+	</array>
 </dict>
 </plist>

@@ -36,7 +36,7 @@ export default function ListingDetail(props) {
   const uid = auth().currentUser.uid;
   const isSelected = favorites?.find(fav => fav.id == item.id);
   const [favIsSelected, setFavIsSelected] = useState(isSelected);
-  const [supplierData, setSupplierData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const dispatch = useDispatch();
   const openImageSlider = index => {
@@ -141,14 +141,18 @@ export default function ListingDetail(props) {
   };
   const handleShare = async () => {
     try {
+      setLoading(true)
       const imageLink = await Helper.imageUrlToBase64(item.advertiserImages[0]);
       Share.open({
-        title: item.name,
-        message: item.shareUrl,
+        title: item.title,
+        message: `Hey, Checkout this advertiser ${item.shareUrl}`,
         url: imageLink,
       });
     } catch (error) {
       console.log(error);
+    }
+    finally{
+      setLoading(false)
     }
     //let {channel, completed, error} = await buo.showShareSheet(shareOptions, linkProperties, controlParams)
   };
@@ -180,6 +184,7 @@ export default function ListingDetail(props) {
       bounces={false}
       showsVerticalScrollIndicator={false}>
       <Header
+       title={item.title}
         back
         navigation={navigation}
         rightIcon={'dots-vertical'}
@@ -219,8 +224,8 @@ export default function ListingDetail(props) {
           defaultSource={images.imagePlaceholder}
         />
         <HStack justifyContent={"space-between"} flex={1}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Button p={1} backgroundColor={"#d6ecea"} _text={{color:colors.appPrimary}}>
+        <Text style={styles.title}>{item.name}</Text>
+        <Button p={1} isLoadingText={"Share Profile"} isLoading={loading} _loading={{opacity:1,_icon:{color:colors.appPrimary}}} backgroundColor={"#d6ecea"} _text={{color:colors.appPrimary}} onPress={handleShare}>
           Share Profile
         </Button>
         </HStack>

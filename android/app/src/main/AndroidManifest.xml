@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="in.softment.ausseprationdivorce">
+  package="com.hjmt.ausseprationdivorce">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -21,6 +21,30 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+        <!-- Branch URI Scheme -->
+             <!-- Branch URI Scheme -->
+            <intent-filter>
+                <!-- If utilizing $deeplink_path please explicitly declare your hosts, or utilize a wildcard(*) -->
+                <data android:scheme="ausseprationdivorce" android:host="open" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+              <!-- Branch App Links - Live App -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="2xp9d.app.link" />
+                <!-- example-alternate domain is required for App Links when the Journeys/Web SDK and Deepviews are used inside your website.  -->
+                <data android:scheme="https" android:host="2xp9d-alternate.app.link" />
+            </intent-filter>
+              <!-- Branch init -->
+       
+      </activity>
+       <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_dAjVcG19LZh0xHTq1p7tFbjgtDm1yXGT" />
+        <!-- <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_hlxrWC5Zx16DkYmWu4AHiimdqugRYMr" /> -->
+        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />  
       </activity>
     </application>
 </manifest>

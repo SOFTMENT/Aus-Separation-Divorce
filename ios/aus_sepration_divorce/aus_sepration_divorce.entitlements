@@ -6,5 +6,10 @@
 	<array>
 		<string>Default</string>
 	</array>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:2xp9d.app.link</string>
+		<string>applinks:2xp9d-alternate.app.link</string>
+	</array>
 </dict>
 </plist>

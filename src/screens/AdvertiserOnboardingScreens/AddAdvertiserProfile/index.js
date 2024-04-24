@@ -114,36 +114,22 @@ export default function AddListing(props) {
           }),
         )
           .then(async advertiserImages => {
-            // let buo = await branch.createBranchUniversalObject(
-            //   `item/${ref.id}`,
-            //   {
-            //     title,
-            //     contentDescription: about,
-            //     contentMetadata: {
-            //       customMetadata: {
-            //         key1: 'value1',
-            //       },
-            //     },
-            //   },
-            // );
-            //   let linkProperties = {
-            //     feature: 'sharing',
-            //     channel: 'facebook',
-            //     campaign: 'content 123 launch'
-            //   }
-
-            //   let controlParams = {
-            //     $desktop_url: 'https://example.com/home',
-            //     custom: 'data'
-            //   }
-            //   let shareOptions = {
-            //     messageHeader: 'Check this out',
-            //     messageBody: 'No really, check this out!'
-            //   }
-            // let {url} = await buo.generateShortUrl();
+            let buo = await branch.createBranchUniversalObject(
+              `item/${uid}`,
+              {
+                title,
+                contentDescription: about,
+                contentMetadata: {
+                  customMetadata: {
+                    key1: 'user',
+                  },
+                },
+              },
+            );
+            let {url} = await buo.generateShortUrl();
             await ref.update({
                 advertiserImages,
-            //   shareUrl:url,
+               shareUrl:url,
               //updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
               ...obj,
               title,

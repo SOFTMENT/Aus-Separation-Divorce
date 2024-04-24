@@ -3,7 +3,7 @@ package com.aus_sepration_divorce;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-
+import io.branch.rnbranch.*;
 public class MainActivity extends ReactActivity {
 
   /**
@@ -14,7 +14,12 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "aus_sepration_divorce";
   }
-
+// Override onStart:
+      @Override
+      protected void onStart() {
+          super.onStart();
+          RNBranchModule.initSession(getIntent().getData(), this);
+      }
   /**
    * Returns the instance of the {@link ReactActivityDelegate}. There the RootView is created and
    * you can specify the renderer you wish to use - the new renderer (Fabric) or the old renderer

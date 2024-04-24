@@ -1,5 +1,5 @@
 package com.aus_sepration_divorce;
-
+import io.branch.rnbranch.RNBranchModule;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -52,6 +52,10 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+        // Branch logging for debugging
+  RNBranchModule.enableLogging();
+  
+  RNBranchModule.getAutoInstance(this);
     // If you opted-in for the New Architecture, we enable the TurboModule system
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);

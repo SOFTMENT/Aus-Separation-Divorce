@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
 import axios from 'axios';
-import {Button, Center, HStack, Icon, Link, ScrollView, View} from 'native-base';
+import {Button, Center, HStack, Icon, Link, ScrollView, View, VStack} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {
   Image,
@@ -19,7 +19,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import fonts from '../../../../assets/fonts';
 import images from '../../../assets/images';
 import Helper from '../../../common/Helper';
-import {spacing} from '../../../common/variables';
+import {fontSizes, spacing} from '../../../common/variables';
 import Header from '../../../components/Header';
 import MyButton from '../../../components/MyButton';
 import {setFavorites} from '../../../store/userSlice';
@@ -161,16 +161,18 @@ export default function VendorHome(props) {
       showsVerticalScrollIndicator={false}>
       <Header
        // back
+        title={userData.title}
         navigation={navigation}
         rightIcon={'create'}
         rightIsComponent={false}
         onRightIconPress={()=>{
           navigation.navigate("EditAdvertiser",{item:{...userData,id:uid}})
         }}
+        extraStyle={{backgroundColor:"#C4E7E5"}}
         //normalBack={true}
       />
        <Carousel
-                style={{marginTop:-20}}
+                //style={{marginTop:-8}}
                 width={Util.getWidth(100)}
                 height={Util.getHeight(25)}
                 //autoPlay={true}
@@ -196,7 +198,10 @@ export default function VendorHome(props) {
           defaultSource={images.imagePlaceholder}
         />
         <HStack justifyContent={"space-between"} flex={1}>
-        <Text style={styles.title}>{userData.title}</Text>
+        <VStack ml={5}>
+        <Text style={styles.title}>{userData.name}</Text>
+        <Text style={[styles.subtitle,{fontSize:fontSizes.extraExtraSmall}]}>{userData.email}</Text>
+        </VStack>
         {/* <Button p={1} backgroundColor={"#d6ecea"} _text={{color:colors.appPrimary}}>
           Share Profile
         </Button> */}

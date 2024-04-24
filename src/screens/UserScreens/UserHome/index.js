@@ -39,6 +39,7 @@ import {setCurrentPosition, setFavorites} from '../../../store/userSlice';
 import colors from '../../../theme/colors';
 import NearbyHome from './NearbyHome';
 import styles from './styles';
+import branch from 'react-native-branch';
 const radius = 1000 * 10;
 export default function UserHome(props) {
   const {navigation} = props;
@@ -49,13 +50,15 @@ export default function UserHome(props) {
   const [categories, setCategories] = useState([]);
   const [nearbyData, setNearByData] = useState([]);
   const [noData, setNoData] = useState(false);
-  const [topDataLoading, setTopDataLoading] = useState(false);
+  const [disableLoad, setDisableLoad] = useState(false);
   const [nearLoading, setNearLoading] = useState(false);
   useEffect(() => {
     // getFavorites()
+    subscribeBranchIO()
     getCategories();
     handleLocation(handleLocationAcceptance, handleLocationRejection);
     const sub = AppState.addEventListener('change', () => {
+      setDisableLoad(true)
       handleLocation(handleLocationAcceptance, handleLocationRejection);
     });
     // focusListener = props.navigation.addListener('didFocus', () => {
@@ -67,6 +70,56 @@ export default function UserHome(props) {
       sub.remove();
     };
   }, []);
+  const subscribeBranchIO = async() => {
+      // Listener
+  unsubscribe = branch.subscribe({
+    onOpenComplete:({error,params,uri})=>{
+      if (!error) {
+        // Handle the deep link data here
+        const customData = params['key1'];
+        // Perform actions based on the deep link data
+        const id = params['$canonical_identifier']
+        
+        if(id){
+          if(customData == 'user'){
+            try {
+              firestore()
+              .collection("Users")
+              .doc(id.split('/')[1])
+              .get()
+              .then(doc=>{
+                const item = doc.data()
+                if(doc.exists)
+                navigation.navigate("ListingDetail",{item})
+              })
+            } catch (error) {
+              
+            }
+          }
+          // else
+          // {
+          //   try {
+          //     firestore()
+          //     .collection("Listing")
+          //     .doc(id.split('/')[1])
+          //     .get()
+          //     .then(doc=>{
+          //       const item = doc.data()
+          //       if(doc.exists)
+          //       navigation.navigate("ListingDetail",{item})
+          //     })
+          //   } catch (error) {
+              
+          //   }
+          // }
+        }
+      }
+    }
+  });
+
+  // let latestParams = await branch.getLatestReferringParams() // Params from last open
+  // let installParams = await branch.getFirstReferringParams() // Params from original install
+  }
   function compare(a, b) {
     if (a.name === 'Other') return 1; // "Other" should come last
     if (b.name === 'Other') return -1; // "Other" should come last
@@ -155,7 +208,6 @@ export default function UserHome(props) {
     );
   };
   const getNearbyData = async location => {
-    console.log('here');
     const bounds = geohashQueryBounds(
       [location.latitude, location.longitude],
       radius,
@@ -208,6 +260,7 @@ export default function UserHome(props) {
       })
       .finally(() => {
         setNearLoading(false);
+        setDisableLoad(false)
       });
   };
   const getAllData = location => {
@@ -317,14 +370,14 @@ export default function UserHome(props) {
                     bounces={false}
                 />
             </Skeleton> */}
-      <Skeleton
-          borderWidth={1}
-          borderColor="coolGray.200"
-          endColor="warmGray.300"
-          width={Util.getWidth(50) - 2 * spacing.medium}
-          h={100}
-          borderRadius={10}
-          isLoaded={!nearLoading}>
+        <Skeleton
+            borderWidth={1}
+            borderColor="coolGray.200"
+            endColor="warmGray.300"
+            width={Util.getWidth(50) - 2 * spacing.medium}
+            h={100}
+            borderRadius={10}
+            isLoaded={!nearLoading || disableLoad}>
           <FlatList
             renderItem={renderNearby}
             keyExtractor={item => item.id}
@@ -336,6 +389,7 @@ export default function UserHome(props) {
             ListEmptyComponent={ <Center h={100}>
             <Text style={styles.noSpaces}>No advertisers near you</Text>
           </Center>}
+          
           />
         </Skeleton>
       <LocationRequiredModal

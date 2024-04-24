@@ -101,13 +101,13 @@ export default AccountMenuList = (props) => {
     const rateUs = () => {
         if (Platform.OS != 'ios') {
             //To open the Google Play Store
-            Linking.openURL(`market://details?id=in.softment.sitesee`).catch(err =>
+            Linking.openURL(`market://details?id=com.hjmt.ausseprationdivorce`).catch(err =>
                 alert('Please check for the Google Play Store')
             );
         } else {
             //To open the Apple App Store
             Linking.openURL(
-                `itms-apps://itunes.apple.com/us/app/apple-store/6448141803?mt=8`
+                `itms-apps://itunes.apple.com/us/app/apple-store/6497652602?mt=8`
             ).catch(err => alert('Please check for the App Store'));
         }
     }
@@ -212,15 +212,15 @@ export default AccountMenuList = (props) => {
             label: "",
             subMenu: [
                 
-                {
-                    label: "Notifications",
-                    icon: "bell",
-                    //onClick: rateUs,
-                    asMaterial:true,
-                    onClick:()=>{
-                        navigation.navigate("NotificationScreen")
-                    }
-                },
+                // {
+                //     label: "Notifications",
+                //     icon: "bell",
+                //     //onClick: rateUs,
+                //     asMaterial:true,
+                //     onClick:()=>{
+                //         navigation.navigate("NotificationScreen")
+                //     }
+                // },
                 {
                     label: "Share App",
                     icon: "share-circle",
@@ -245,7 +245,7 @@ export default AccountMenuList = (props) => {
                     icon: "file-document-edit",
                     asMaterial:true,
                     onClick: () => {
-                        linkingUtil.openBrowser(SOFTMENT)
+                        navigation.navigate("PDFViewer",{title:"Privacy Policy",uri:'https://firebasestorage.googleapis.com/v0/b/aus-sepration-divorce.appspot.com/o/Documents%2FAS%26D%20Privacy%20Policy.pdf?alt=media&token=4162c64c-da26-417a-940c-d07505ba8983'})
                     }
                 },
                 {
@@ -253,7 +253,7 @@ export default AccountMenuList = (props) => {
                     icon: "text-box",
                     asMaterial:true,
                     onClick: () => {
-                        linkingUtil.openBrowser(SOFTMENT)
+                        navigation.navigate("PDFViewer",{title:"Terms & Conditions",uri:'https://firebasestorage.googleapis.com/v0/b/aus-sepration-divorce.appspot.com/o/Documents%2FAS%26D%20Terms%20and%20conditions.pdf?alt=media&token=d0c36a1f-1b9d-4c5d-b3d1-f8a5e4213acb'})
                     }
                 },
                 {

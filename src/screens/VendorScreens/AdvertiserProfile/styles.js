@@ -56,7 +56,6 @@ export default StyleSheet.create({
         fontSize:responsiveSize(11),
         fontFamily:fonts.medium,
         color:"#888888",
-        marginTop:spacing.extraExtraSmall,
     },
     orderView:{
         backgroundColor:colors.appPrimary,

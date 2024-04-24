@@ -9,21 +9,20 @@ import HomeIcon from '../assets/svgs/home.svg';
 import { fontSizes } from '../common/variables';
 import Chat from '../screens/Chat';
 import Inbox from '../screens/Inbox';
+import NotificationScreen from '../screens/NotificationScreen';
 import AccountDetailsScreen from '../screens/VendorScreens/AccountDetailsScreen';
+import AdvertiserProfile from '../screens/VendorScreens/AdvertiserProfile';
+import EditAdvertiser from '../screens/VendorScreens/EditAdvertiser';
 import MyListingScreen from '../screens/VendorScreens/MyListingScreen';
 import VendorHome from '../screens/VendorScreens/VendorHome';
-import AdvertiserProfile from '../screens/VendorScreens/AdvertiserProfile';
-import colors from '../theme/colors';
-import AddListing from '../screens/VendorScreens/AddListing';
-import EditAdvertiser from '../screens/VendorScreens/EditAdvertiser';
-import NotificationScreen from '../screens/NotificationScreen';
-import VendorAllListing from '../screens/VendorScreens/VendorAllListing';
 import VendorListingDetail from '../screens/VendorScreens/VendorListingDetail';
+import colors from '../theme/colors';
+import PDFViewer from '../screens/PDFViewer';
 const Tab = createBottomTabNavigator();
 const VendorSpacesStack = createNativeStackNavigator();
 const InboxStack = createNativeStackNavigator();
 const VendorHomeStack = createNativeStackNavigator();
-const VendorAddListing = createNativeStackNavigator();
+// const VendorAddListing = createNativeStackNavigator();
 const VendorProfileStack = createNativeStackNavigator();
 const MyVendorProfileStack = () => {
   return (
@@ -36,6 +35,7 @@ const MyVendorProfileStack = () => {
         component={AdvertiserProfile}
       />
             <VendorProfileStack.Screen name='NotificationScreen' component={NotificationScreen}/>
+            <VendorProfileStack.Screen name='PDFViewer' component={PDFViewer}/>
 
       <VendorProfileStack.Screen
         name="VendorAccountDetail"
@@ -44,16 +44,16 @@ const MyVendorProfileStack = () => {
     </VendorProfileStack.Navigator>
   );
 };
-const MyVendorAddListing = () => {
-  return (
-    <VendorAddListing.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <VendorAddListing.Screen name="AddListing" component={AddListing} />
-    </VendorAddListing.Navigator>
-  );
-};
+// const MyVendorAddListing = () => {
+//   return (
+//     <VendorAddListing.Navigator
+//       screenOptions={{
+//         headerShown: false,
+//       }}>
+//       <VendorAddListing.Screen name="AddListing" component={AddListing} />
+//     </VendorAddListing.Navigator>
+//   );
+// };
 const MyVendorHomeStack = () => {
   return (
     <VendorHomeStack.Navigator
@@ -63,7 +63,7 @@ const MyVendorHomeStack = () => {
       <VendorHomeStack.Screen name="HomeScreen" component={VendorHome} />
       <VendorHomeStack.Screen name="PersonalChat" component={Chat} />
       <VendorHomeStack.Screen name="MyListingScreen" component={MyListingScreen} />
-      <VendorHomeStack.Screen name="VendorAllListing" component={VendorAllListing} />
+      {/* <VendorHomeStack.Screen name="VendorAllListing" component={VendorAllListing} /> */}
       <VendorHomeStack.Screen name="EditAdvertiser" component={EditAdvertiser} />
       <VendorHomeStack.Screen name='LocationSelectorScreen' component={LocationSelectorScreen}/>
 

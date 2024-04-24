@@ -96,7 +96,7 @@ const App = () => {
   return (
     <GestureHandlerRootView style={{flex:1}}>
     <StripeProvider
-        publishableKey={""}
+        publishableKey={"pk_test_51KFL8tSDWf0JstBgTpxm7DyeiqmojL5nG5gixy7TZG4saXVyDijctKS2axplOrpupagx03wcIAxT7P83kby4neaE00xYu35VZJ"}
     // merchantIdentifier="merchant.identifier" // required for Apple Pay
     //urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
     >

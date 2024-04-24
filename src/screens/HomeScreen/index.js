@@ -19,7 +19,7 @@ const HomeScreen = props => {
   const memberShipCallback = async membershipDetails => {
     let buo = await branch.createBranchUniversalObject(`item/${uid}`, {
         title:"Hey",
-        contentDescription: "Checkout this seller profile",
+        contentDescription: "Checkout this advertiser profile",
         contentMetadata: {
           customMetadata: {
             key1: 'user',
@@ -92,9 +92,10 @@ const HomeScreen = props => {
                 if (user.data().membershipActive) {
                   dispatch(setUserData({...user.data(), userType: 'Advertiser'}));
                   navigateAndReset('VendorBottomTab');
-                } else {
-                  onOpen();
-                }
+                } 
+                // else {
+                //   onOpen();
+                // }
               }
             } else {
               if (val == null || val == 'User') {
