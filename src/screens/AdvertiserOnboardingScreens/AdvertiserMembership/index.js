@@ -24,50 +24,41 @@ const AdvertiserMembership = ({navigation, route}) => {
   const {initPaymentSheet, presentPaymentSheet} = useStripe();
   const handleDone = async () => {
     setLoading(true);
-    firestore()
-    .collection('Users')
-    .doc(auth().currentUser.uid)
-    .update({
-      membershipActive: true,
-      profileCompleted: true,
-      // subscriptionId,
-    })
-    .then(() => {
-      navigateAndReset('HomeScreen');
-    })
-    .finally(() => {
-      setLoading(false);
+    // firestore()
+    // .collection('Users')
+    // .doc(auth().currentUser.uid)
+    // .update({
+    //   membershipActive: true,
+    //   profileCompleted: true,
+    //   // subscriptionId,
+    // })
+    // .then(() => {
+    //   navigateAndReset('HomeScreen');
+    // })
+    // .finally(() => {
+    //   setLoading(false);
+    // });
+    const userData = await firestore()
+      .collection('Users')
+      .doc(auth().currentUser.uid).get();
+    const {customerId} = userData.data();
+    const res2 = await functions().httpsCallable('createSubscription')({
+      customerId: customerId,
     });
-    // return
-    // const userData = await firestore()
-    //   .collection('Users')
-    //   .doc(auth().currentUser.uid).get();
-    
-    // const res = await functions().httpsCallable('createCustomer')({
-    //   email: userData.data().email,
-    //   name: userData.data().name,
-    //   uid: auth().currentUser.uid,  
-    // });
-    // const {customerId} = res.data;
-    // const res2 = await functions().httpsCallable('createSubscription')({
-    //   customerId: customerId,
-    // });
-    // const {subscriptionId, clientSecret,subscription} = res2.data;
-    // console.log('secret', clientSecret);
-    // console.log("subscription",subscription)
-    // const {error} = await initPaymentSheet({
-    //   paymentIntentClientSecret: clientSecret,
-    //   returnURL: 'stripe-example://payment-sheet',
-    //   // Set `allowsDelayedPaymentMethods` to true if your business handles
-    //   // delayed notification payment methods like US bank accounts.
-    //   allowsDelayedPaymentMethods: true,
-    // });
-    // presentSheet(subscriptionId);
-    // if (error) {
-    //   // Handle error
-    //   console.log('error', error);
-    // }
-    // setLoading(false);
+    const {subscriptionId, clientSecret,subscription} = res2.data;
+    const {error} = await initPaymentSheet({
+      paymentIntentClientSecret: clientSecret,
+      returnURL: 'stripe-example://payment-sheet',
+      // Set `allowsDelayedPaymentMethods` to true if your business handles
+      // delayed notification payment methods like US bank accounts.
+      allowsDelayedPaymentMethods: true,
+    });
+    presentSheet(subscriptionId);
+    if (error) {
+      // Handle error
+      console.log('error', error);
+    }
+    setLoading(false);
   };
   const presentSheet = async (subscriptionId) => {
     setLoading(true);

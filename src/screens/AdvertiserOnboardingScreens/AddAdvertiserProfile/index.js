@@ -21,7 +21,7 @@ import colors from '../../../theme/colors';
 import styles from './styles';
 import {useIsFocused, useRoute} from '@react-navigation/native';
 import branch from 'react-native-branch';
-
+import functions from '@react-native-firebase/functions';
 export default function AddListing(props) {
   const {navigation,route} = props;
   const {obj} = route.params
@@ -127,9 +127,19 @@ export default function AddListing(props) {
               },
             );
             let {url} = await buo.generateShortUrl();
+            const userData = await firestore()
+            .collection('Users')
+            .doc(auth().currentUser.uid).get();
+            const res = await functions().httpsCallable('createCustomer')({
+              email: userData.data().email,
+              name: userData.data().name,
+              uid: auth().currentUser.uid,  
+            });
+            const {customerId} = res.data;
             await ref.update({
                 advertiserImages,
                shareUrl:url,
+               customerId,
               //updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
               ...obj,
               title,

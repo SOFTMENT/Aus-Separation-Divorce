@@ -38,12 +38,21 @@ exports.createCustomer = functions.https.onCall(async (data, res) => {
           },
       });
       const userRef = db.collection("Users");
-      await userRef.doc(uid).update({
-        customerId:customer.id
-      })
-      return {
-        customerId:customer.id,
+      const userData = await userRef.doc(uid).get()
+      let customerId = null
+      if(userData.data().customerId){
+        customerId = userData.data().customerId
       }
+      else{
+        await userRef.doc(uid).update({
+          customerId:customer.id
+        })
+        customerId = customer.id
+      }
+      return{
+        customerId
+      }
+      
     }
     catch (error) {
         throw new functions.https.HttpsError('error', { error: { message: error.message } });
