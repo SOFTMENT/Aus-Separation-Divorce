@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     notNow:{
         flex:0.45,
-        borderColor:colors.appDefaultColor,
+        borderColor:colors.appPrimary,
         borderWidth:1,
         backgroundColor:"white"
     }

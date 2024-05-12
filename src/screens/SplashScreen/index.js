@@ -74,7 +74,7 @@ const SplashScreen = (props) => {
             <Image
                     source={images.bgTopImage}
                     style={{width:"100%"}}
-                    resizeMode='contain'
+                    resizeMode='cover'
                 />
             <View style={styles.logoView}>
                 <Image

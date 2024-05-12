@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         height: 400,
+        width:"95%"
         //height: 200,
     },
     siteSee: {
@@ -23,6 +24,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        paddingHorizontal:spacing.medium,
+        //backgroundColor:'red'
     },
     btnView:{
         flex:0.4,

@@ -68,16 +68,16 @@ const UserLogin = (props) => {
                     .get()
                     .then(async doc => {
                         const userDoc = doc.data()
-                        if (userDoc.isDeleted) {
-                            if (auth().currentUser.providerData[0].providerId == "google.com") {
-                                //await GoogleSignin.revokeAccess();
-                                await GoogleSignin.signOut();
-                            }
-                            auth().signOut().then(() => {
-                                Util.showMessage("error","Oops!","This account has been marked as deleted, please register with new email.")
-                            })
-                        }
-                        else if (userDoc.isAdmin) {
+                        // if (userDoc.isDeleted) {
+                        //     if (auth().currentUser.providerData[0].providerId == "google.com") {
+                        //         //await GoogleSignin.revokeAccess();
+                        //         await GoogleSignin.signOut();
+                        //     }
+                        //     auth().signOut().then(() => {
+                        //         Util.showMessage("error","Oops!","This account has been marked as deleted, please register with new email.")
+                        //     })
+                        // }
+                        if (userDoc.isAdmin) {
                             navigateAndReset("AdminScreen")
                             return
                         }
@@ -189,16 +189,16 @@ const UserLogin = (props) => {
             .get()
             .then(async(user) => {
                 if (user.exists) {
-                    if (user.data().isDeleted) {
-                        if (auth().currentUser.providerData[0].providerId == "google.com") {
-                            //await GoogleSignin.revokeAccess();
-                            await GoogleSignin.signOut();
-                        }
-                        auth().signOut().then(() => {
-                            Util.showMessage("error","Oops!","This account has been marked as deleted, please register with new email.")
-                        })
-                    }
-                    else {
+                    // if (user.data().isDeleted) {
+                    //     if (auth().currentUser.providerData[0].providerId == "google.com") {
+                    //         //await GoogleSignin.revokeAccess();
+                    //         await GoogleSignin.signOut();
+                    //     }
+                    //     auth().signOut().then(() => {
+                    //         Util.showMessage("error","Oops!","This account has been marked as deleted, please register with new email.")
+                    //     })
+                    // }
+                   
                         await AsyncStorage.setItem("userType",Util.getUserType(tab))
                         navigateAndReset("HomeScreen", { uid: user.data().uid })
                         // if((user.data().userType == Util.getUserType(tab)))
@@ -214,7 +214,7 @@ const UserLogin = (props) => {
                         //             console.log(error)
                         //         })
                         //     }
-                    }
+                    
                 }
                 else {
                     setUserData(fullName)
@@ -326,7 +326,7 @@ const UserLogin = (props) => {
             keyboardShouldPersistTaps={"handled"}
         // stickyHeaderHiddenOnScroll
         >
-            <Image source={images.bgTopImage} width={"100%"}/>
+            <Image source={images.bgTopImage} style={{width:"100%"}} resizeMode='cover'/>
             <Header back extraStyle={styles.header} navigation={navigation}/>
                 <View
                 style={styles.container}>

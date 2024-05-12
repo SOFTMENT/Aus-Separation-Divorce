@@ -22,6 +22,7 @@ import styles from './styles';
 import {useIsFocused, useRoute} from '@react-navigation/native';
 import branch from 'react-native-branch';
 import functions from '@react-native-firebase/functions';
+import { navigateAndReset } from '../../../navigators/RootNavigation';
 export default function AddListing(props) {
   const {navigation,route} = props;
   const {obj} = route.params
@@ -162,7 +163,21 @@ export default function AddListing(props) {
             //   'Images uploaded s',
             // );
             clearData();
-            navigation.navigate("AdvertiserMembership")
+            const liveDoc = await firestore().collection("AppLive").doc("e1SSSyK5SQI3z4yJShYu").get()
+            if(liveDoc.data().isLive)
+            {
+              navigation.navigate("AdvertiserMembership")
+            }
+            else{
+              await firestore()
+              .collection('Users')
+              .doc(auth().currentUser.uid)
+              .update({
+                membershipActive: true,
+                profileCompleted: true,
+              })
+              navigateAndReset('HomeScreen');
+            }
           })
           .finally(() => {
             setLoaderVisibility(false);

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Australian Sepration, Divorce</string>
+	<string>Australian Sepration and Divorce</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -74,16 +74,14 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Australian Sepration, Divorce requires media library access to upload picture</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Australian Sepration, Divorce requires camera access to upload profile picture</string>
+	<string>Australian Sepration, Divorce requires access to the camera to upload your profile photo.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Australian Sepration, Divorce requires location access to show nearby advertiser</string>
+	<string>Australian Sepration, Divorce requires location access to show nearby advertisers</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Australian Sepration, Divorce requires location access to show nearby advertiser</string>
+	<string>Australian Sepration, Divorce requires location access to show nearby advertisers</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Australian Sepration, Divorce requires photo library access to upload picture</string>
+	<string>Australian Sepration, Divorce requires access to the photo library to upload your profile photo.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>
@@ -102,8 +100,12 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

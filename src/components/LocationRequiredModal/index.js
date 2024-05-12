@@ -18,7 +18,7 @@ const LocationRequiredModal = (props) => {
                     style={{height:"50%"}}
                 />
                 <Text style={styles.title}>
-                    Explore vendor spaces nearby you.
+                    Explore Advertisers nearby you.
                 </Text>
                 <Text style={styles.subtitle}>
                     Your location helps us bring you to better spaces to find.
@@ -35,7 +35,7 @@ const LocationRequiredModal = (props) => {
                     title={"Not Now"}
                     containerStyle={styles.notNow}
                     onPress={handleNotNow}
-                    txtStyle={{color:colors.appDefaultColor}}
+                    txtStyle={{color:colors.appPrimary}}
                 />
             </HStack>
         </Modal>

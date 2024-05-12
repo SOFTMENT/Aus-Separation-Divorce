@@ -28,13 +28,13 @@ import SplashScreen from '../screens/SplashScreen';
 import UserLogin from '../screens/UserLogin';
 import UserRegister from '../screens/UserRegister';
 // import UserSelectScreen from '../screens/UserSelectScreen';
-import { navigationRef } from './RootNavigation';
-import UserBottomTab from './UserBottomTab';
-import VendorBottomTab from './VendorBottomTab';
-import AdvertiserOnboardCategory from '../screens/AdvertiserOnboardingScreens/AdvertiserOnboardCategory';
-import AdvertiserOnboardSubcategory from '../screens/AdvertiserOnboardingScreens/AdvertiserOnboardSubcategory';
 import AddAdvertiserProfile from '../screens/AdvertiserOnboardingScreens/AddAdvertiserProfile';
 import AdvertiserMembership from '../screens/AdvertiserOnboardingScreens/AdvertiserMembership';
+import AdvertiserOnboardCategory from '../screens/AdvertiserOnboardingScreens/AdvertiserOnboardCategory';
+import AdvertiserOnboardSubcategory from '../screens/AdvertiserOnboardingScreens/AdvertiserOnboardSubcategory';
+import { navigationRef } from './RootNavigation';
+import UserBottomTab from './UserBottomTab';
+import AdvertiseBottomTab from './AdvertiseBottomTab';
 
 const Stack = createNativeStackNavigator();
 // const ServiceStack = createNativeStackNavigator()
@@ -107,7 +107,7 @@ const AppNavigator = () => {
                 <Stack.Screen name='LoginScreen' component={UserLogin} />
                 <Stack.Screen name='HomeScreen' component={HomeScreen} />
                 <Stack.Screen name='UserBottomTab' component={UserBottomTab}/>
-                <Stack.Screen name='VendorBottomTab' component={VendorBottomTab}/>
+                <Stack.Screen name='AdvertiseBottomTab' component={AdvertiseBottomTab}/>
                 <Stack.Screen name='UserRegister' component={UserRegister}/>
                 <Stack.Screen name='OnBoardPhoto' component={OnBoardPhoto}/>
                 <Stack.Screen name='AdvertiserOnboardCategory' component={AdvertiserOnboardCategory}/>

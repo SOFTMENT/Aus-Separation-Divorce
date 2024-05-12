@@ -1,5 +1,5 @@
 export default {
-    logo: require("./logo.jpeg"),
+    logo: require("./logo.png"),
     //backArrow: require("./back-arrow.png"),
     // upArrow:require("./upArrow.png"),
     // downArrow:require("./downArrow.png"),

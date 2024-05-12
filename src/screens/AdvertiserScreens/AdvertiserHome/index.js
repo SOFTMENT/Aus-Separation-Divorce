@@ -1,35 +1,21 @@
 import auth from '@react-native-firebase/auth';
-import firestore, {firebase} from '@react-native-firebase/firestore';
-import axios from 'axios';
-import {Button, Center, HStack, Icon, Link, ScrollView, View, VStack} from 'native-base';
-import React, {useEffect, useState} from 'react';
+import { Center, HStack, Icon, ScrollView, View, VStack } from 'native-base';
+import React, { useState } from 'react';
 import {
-  Image,
-  ImageBackground,
-  Linking,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
+  Text
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import Share from 'react-native-share';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useDispatch, useSelector} from 'react-redux';
-import fonts from '../../../../assets/fonts';
+import ImageView from 'react-native-image-viewing';
+import Carousel from 'react-native-reanimated-carousel';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useDispatch, useSelector } from 'react-redux';
 import images from '../../../assets/images';
-import Helper from '../../../common/Helper';
-import {fontSizes, spacing} from '../../../common/variables';
+import Util from '../../../common/util';
+import { fontSizes, spacing } from '../../../common/variables';
 import Header from '../../../components/Header';
-import MyButton from '../../../components/MyButton';
-import {setFavorites} from '../../../store/userSlice';
 import colors from '../../../theme/colors';
 import styles from './styles';
-import ImageView from 'react-native-image-viewing';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Util from '../../../common/util';
-import Carousel from 'react-native-reanimated-carousel';
-export default function VendorHome(props) {
+export default function AdvertiserHome(props) {
   const {route, navigation} = props;
   // const {item} = route.params;
   const {favorites, userData} = useSelector(state => state.user);

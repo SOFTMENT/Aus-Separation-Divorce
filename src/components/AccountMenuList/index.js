@@ -1,31 +1,26 @@
-import firestore, { firebase } from '@react-native-firebase/firestore'
-import axios from "axios"
-import React, { useState } from "react"
-import { Alert, Image, Linking, Text, TouchableOpacity, View } from "react-native"
-import images from "../../assets/images"
-import linkingUtil from "../../common/linkingUtil"
-import { ACCOUNT_LINK, CREATE_ACCOUNT, PAYMENT_TRANSFER, SOFTMENT } from "../../config/Networksettings"
-import AppConstant from "../../config/Constants"
-import styles from "./styles"
-import Util from '../../common/util'
-import { Icon } from 'native-base'
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useDispatch, useSelector } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import { Icon, useDisclose } from 'native-base'
+import React, { useState } from "react"
+import { Alert, Linking, Platform, Share, Text, TouchableOpacity, View } from "react-native"
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useSelector } from 'react-redux'
+import Util from '../../common/util'
+import { navigateAndReset } from '../../navigators/RootNavigation'
 import LoaderComponent from '../LoaderComponent'
 import PopupMessage from '../PopupMessage'
-import { setUserData } from '../../store/userSlice'
-import colors from '../../theme/colors'
-import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { navigateAndReset } from '../../navigators/RootNavigation'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import styles from "./styles"
+import SubscriptionModal from '../../screens/AdvertiserScreens/SubscriptionModal'
 export default AccountMenuList = (props) => {
     const { navigation, isUser } = props
     const [loaderVisibility, setLoaderVisibility] = useState(false)
     const [successPopup, setSuccessPopup] = useState(false)
     const { accountStatus, accountId, balance,userType } = useSelector(state => state.user.userData)
     const uid = auth().currentUser.uid
+    const {isOpen, onToggle, onClose, onOpen} = useDisclose();
+    const {userData} = useSelector(state => state.user);
     const deleteAccount = async() => {
         Alert.alert(
             "Delete Account",
@@ -47,16 +42,14 @@ export default AccountMenuList = (props) => {
                             await firestore()
                             .collection("Users")
                             .doc(uid)
-                            .update({
-                               isDeleted:true,
-                               status:"deleted"
-                            })
-                            if (auth().currentUser.providerData[0].providerId == "google.com") {
-                                //await GoogleSignin.revokeAccess();
-                                await GoogleSignin.signOut();
-                            }
-                            await auth()
-                                .signOut()
+                            .delete()
+                            await auth().currentUser.delete()
+                            // if (auth().currentUser.providerData[0].providerId == "google.com") {
+                            //     //await GoogleSignin.revokeAccess();
+                            //     await GoogleSignin.signOut();
+                            // }
+                            // await auth()
+                            //     .signOut()
                             Util.showMessage("success","Account Deleted")
                             navigateAndReset("OnboardingScreen")
                            } catch (error) {
@@ -98,6 +91,23 @@ export default AccountMenuList = (props) => {
             console.log(error)
         }
     }
+    const shareApp = async() => {
+        try {
+            const result = await Share.share({
+              message: 'Check out this awesome app!', // Message to be shared
+              url: Platform.OS == "ios"?"https://apps.apple.com/us/app/australian-separation-divorce/id6497652602":""
+              // You can also include additional options like title, subject, etc.
+            });
+            
+            if (result.action === Share.sharedAction) {
+              console.log('App shared successfully');
+            } else if (result.action === Share.dismissedAction) {
+              console.log('Share cancelled');
+            }
+          } catch (error) {
+            console.error('Error sharing app:', error.message);
+          }
+    }
     const rateUs = () => {
         if (Platform.OS != 'ios') {
             //To open the Google Play Store
@@ -114,8 +124,9 @@ export default AccountMenuList = (props) => {
     const handleSuccess = () => {
         setSuccessPopup(false)
     }
-    
-   
+    const handleSubscription = () => {
+        onOpen()
+    }
     const driverMenu = [
         
         // {
@@ -183,48 +194,20 @@ export default AccountMenuList = (props) => {
     ]
     const menu = [
         
-        // {
-        //     id: "about",
-        //     label: "About Us",
-        //     subMenu: [
-        //         // {
-        //         //     label:"Privacy Policy",
-        //         //     icon:images.privacyPolicy
-        //         // },
-        //         {
-        //             label: "Terms & Conditions",
-        //             icon: "file-document-outline",
-        //             onClick: () => {
-        //                 //linkingUtil.openBrowser("https://www.cheap-skate.us/")
-        //             }
-        //         },
-        //         // {
-        //         //     label: "App Developer",
-        //         //     icon: "code-tags",
-        //         //     onClick: () => {
-        //         //         linkingUtil.openBrowser(SOFTMENT)
-        //         //     }
-        //         // }
-        //     ]
-        // },
         {
             id: "Settings",
             label: "",
             subMenu: [
-                
-                // {
-                //     label: "Notifications",
-                //     icon: "bell",
-                //     //onClick: rateUs,
-                //     asMaterial:true,
-                //     onClick:()=>{
-                //         navigation.navigate("NotificationScreen")
-                //     }
-                // },
+                {
+                    label: "Subscription",
+                    icon: "share-circle",
+                    onClick: handleSubscription,
+                    asMaterial:true
+                },
                 {
                     label: "Share App",
                     icon: "share-circle",
-                    onClick: rateUs,
+                    onClick: shareApp,
                     asMaterial:true
                 },
                
@@ -287,7 +270,8 @@ export default AccountMenuList = (props) => {
                             {item.label&& <Text style={styles.settingsText}>{item.label}</Text>}
                             {
                                 item.subMenu.map((subItem,index) => {
-                                    console.log(index,item.subMenu.length)
+                                    if(subItem.label != "Subscription"||(subItem.label == "Subscription" && userData?.subscriptionId))
+    
                                     return (
                                         <TouchableOpacity
                                             style={[styles.subMenu,index==item.subMenu.length-1&&{borderBottomWidth:0}]}
@@ -306,8 +290,8 @@ export default AccountMenuList = (props) => {
                                             </View> */}
                                             <View style={styles.subMenuContainer}>
                                                 <Text style={styles.subMenuTitle}>{subItem.label}</Text>
-                                                {/* {
-                                                    subItem.subLabel &&
+                                                {
+                                                    subItem.subLabel ?
                                                     <View style={styles.subsubView}>
                                                         <Text style={styles.subsubtitle}>{subItem.subLabel}</Text>
                                                         {
@@ -320,15 +304,16 @@ export default AccountMenuList = (props) => {
                                                                 color="#414245"
                                                             />
                                                         }
-                                                    </View>
-                                                } */}
-                                                <Icon
-                                                                // style={styles.subMenuImage}
-                                                                name={"chevron-forward-outline"}
-                                                                as={Ionicons}
-                                                                size={"sm"}
-                                                                color="#B0B0B0"
-                                                            />
+                                                    </View>:
+                                                     <Icon
+                                                     // style={styles.subMenuImage}
+                                                     name={"chevron-forward-outline"}
+                                                     as={Ionicons}
+                                                     size={"sm"}
+                                                     color="#B0B0B0"
+                                                 />
+                                                }
+                                               
                                             </View>
                                         </TouchableOpacity>
                                     )
@@ -338,6 +323,10 @@ export default AccountMenuList = (props) => {
                     )
                 })
             }
+            <SubscriptionModal
+                isOpen={isOpen}
+                onClose={onClose}
+            />
             <LoaderComponent visible={loaderVisibility} />
             <PopupMessage visible={successPopup} title="Payment Successful" subtitle="Great" onPress={handleSuccess}/>
         </View>

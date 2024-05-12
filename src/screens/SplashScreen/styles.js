@@ -43,6 +43,7 @@ export default StyleSheet.create({
       },
       logo: {
         height:250,
+        
         //height: 200,
       },
       siteSee:{

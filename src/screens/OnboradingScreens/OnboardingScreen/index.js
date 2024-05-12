@@ -18,7 +18,7 @@ export default function OnboardingScreen(props) {
       <Image
         source={images.bgTopImage}
         style={{width: '100%'}}
-        resizeMode="contain"
+        resizeMode="cover"
       />
       <View style={styles.logoView}>
         <Image source={images.logo} style={styles.logo} resizeMode="contain" />

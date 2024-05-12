@@ -50,7 +50,7 @@ const HomeScreen = props => {
       .then(async () => {
         const user = await firestore().collection('Users').doc(uid).get();
         dispatch(setUserData({...user.data(), userType: 'Supplier'}));
-        navigateAndReset('VendorBottomTab');
+        navigateAndReset('AdvertiseBottomTab');
       });
   };
   async function requestUserPermission() {
@@ -91,11 +91,11 @@ const HomeScreen = props => {
               } else if (val == 'Advertiser') {
                 if (user.data().membershipActive) {
                   dispatch(setUserData({...user.data(), userType: 'Advertiser'}));
-                  navigateAndReset('VendorBottomTab');
+                  navigateAndReset('AdvertiseBottomTab');
                 } 
-                // else {
-                //   onOpen();
-                // }
+                else {
+                  navigateAndReset("AdvertiserMembership",{hideBack:true})
+                }
               }
             } else {
               if (val == null || val == 'User') {

@@ -7,22 +7,20 @@ import {
   useDisclose,
   VStack,
 } from 'native-base';
-import React, {useEffect, useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import images from '../../../assets/images';
 import Helper from '../../../common/Helper';
 import AccountMenuList from '../../../components/AccountMenuList';
-import Header from '../../../components/Header';
 import PhotoPicker from '../../../components/PhotoPicker';
-import {setUserData} from '../../../store/userSlice';
+import UpdateNameDialog from '../../../components/UpdateNameDialog';
+import { setUserData } from '../../../store/userSlice';
 import colors from '../../../theme/colors';
 import styles from './styles';
-import {spacing} from '../../../common/variables';
-import UpdateNameDialog from '../../../components/UpdateNameDialog';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const AdvertiserProfile = props => {
   const {navigation, userData, state} = props;

@@ -7,20 +7,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import fonts from '../../assets/fonts';
 import HomeIcon from '../assets/svgs/home.svg';
 import { fontSizes } from '../common/variables';
-import Chat from '../screens/Chat';
-import Inbox from '../screens/Inbox';
+import AccountDetailsScreen from '../screens/AdvertiserScreens/AccountDetailsScreen';
+import AdvertiserHome from '../screens/AdvertiserScreens/AdvertiserHome';
+import AdvertiserProfile from '../screens/AdvertiserScreens/AdvertiserProfile';
+import EditAdvertiser from '../screens/AdvertiserScreens/EditAdvertiser';
 import NotificationScreen from '../screens/NotificationScreen';
-import AccountDetailsScreen from '../screens/VendorScreens/AccountDetailsScreen';
-import AdvertiserProfile from '../screens/VendorScreens/AdvertiserProfile';
-import EditAdvertiser from '../screens/VendorScreens/EditAdvertiser';
-import MyListingScreen from '../screens/VendorScreens/MyListingScreen';
-import VendorHome from '../screens/VendorScreens/VendorHome';
-import VendorListingDetail from '../screens/VendorScreens/VendorListingDetail';
-import colors from '../theme/colors';
 import PDFViewer from '../screens/PDFViewer';
+import colors from '../theme/colors';
 const Tab = createBottomTabNavigator();
-const VendorSpacesStack = createNativeStackNavigator();
-const InboxStack = createNativeStackNavigator();
 const VendorHomeStack = createNativeStackNavigator();
 // const VendorAddListing = createNativeStackNavigator();
 const VendorProfileStack = createNativeStackNavigator();
@@ -60,9 +54,7 @@ const MyVendorHomeStack = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <VendorHomeStack.Screen name="HomeScreen" component={VendorHome} />
-      <VendorHomeStack.Screen name="PersonalChat" component={Chat} />
-      <VendorHomeStack.Screen name="MyListingScreen" component={MyListingScreen} />
+      <VendorHomeStack.Screen name="HomeScreen" component={AdvertiserHome} />
       {/* <VendorHomeStack.Screen name="VendorAllListing" component={VendorAllListing} /> */}
       <VendorHomeStack.Screen name="EditAdvertiser" component={EditAdvertiser} />
       <VendorHomeStack.Screen name='LocationSelectorScreen' component={LocationSelectorScreen}/>
@@ -70,20 +62,7 @@ const MyVendorHomeStack = () => {
     </VendorHomeStack.Navigator>
   );
 };
-const MyInboxStack = () => {
-  return (
-    <InboxStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <InboxStack.Screen name="Inbox" component={Inbox} />
-      <InboxStack.Screen name="PersonalChat" component={Chat} />
-      <InboxStack.Screen name='VendorListingDetail' component={VendorListingDetail}/>
-
-    </InboxStack.Navigator>
-  );
-};
-function VendorBottomTab() {
+function AdvertiseBottomTab() {
   return (
     <Tab.Navigator
     screenOptions={{
@@ -163,7 +142,7 @@ function VendorBottomTab() {
     </Tab.Navigator>
   );
 }
-export default VendorBottomTab;
+export default AdvertiseBottomTab;
 const styles = StyleSheet.create({
   activeBackground: {padding: 5, paddingHorizontal: 10, borderRadius: 20},
 });

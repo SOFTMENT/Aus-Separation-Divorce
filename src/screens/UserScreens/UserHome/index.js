@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {distanceBetween, geohashQueryBounds} from 'geofire-common';
-import {startCase, uniqBy} from 'lodash';
+import {get, startCase, uniqBy} from 'lodash';
 import {
   Center,
   HStack,
@@ -188,8 +188,28 @@ export default function UserHome(props) {
   };
   const handleNotNow = () => {
     setLocationModal(false);
-    getTopData();
+    getTopData()
   };
+  const getTopData = async() => {
+    try {
+      console.log("hereeee")
+      const snapshot = await firestore()
+        .collection('Users')
+        .where('membershipActive', '==', true)
+        .orderBy('createdAt',"desc")
+        .limit(10)
+        .get()
+        const localData = []
+        console.log(snapshot.size)
+        snapshot.forEach(doc=>{
+          localData.push(doc.data())
+        })
+        setData(localData)
+        
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const handleLocationAcceptance = () => {
     setLocationModal(false);
     Geolocation.getCurrentPosition(
@@ -302,7 +322,7 @@ export default function UserHome(props) {
         </ScrollView>
 
         <HStack alignItems={'center'} justifyContent={'space-between'} mt={5}>
-          <Text style={[styles.name]}>Nearby</Text>
+          <Text style={[styles.name]}>{nearbyData.length?"Nearyby":"Advertisers"}</Text>
         </HStack>
       </View>
     );
@@ -381,13 +401,13 @@ export default function UserHome(props) {
           <FlatList
             renderItem={renderNearby}
             keyExtractor={item => item.id}
-            data={[...nearbyData]}
+            data={nearbyData.length?[...nearbyData]:data}
             bounces={false}
             showsVerticalScrollIndicator={false}
             style={{paddingBottom: 10}}
             ListHeaderComponent={<ListHeaderComponent />}
             ListEmptyComponent={ <Center h={100}>
-            <Text style={styles.noSpaces}>No advertisers near you</Text>
+            <Text style={styles.noSpaces}>No advertisers found</Text>
           </Center>}
           
           />

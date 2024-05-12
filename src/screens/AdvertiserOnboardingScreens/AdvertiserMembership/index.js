@@ -20,6 +20,7 @@ import colors from '../../../theme/colors';
 import styles from './styles';
 const AdvertiserMembership = ({navigation, route}) => {
   const inset = useSafeAreaInsets();
+  const hideBack = route?.params?.hideBack
   const [loading, setLoading] = useState(false);
   const {initPaymentSheet, presentPaymentSheet} = useStripe();
   const handleDone = async () => {
@@ -94,7 +95,7 @@ const AdvertiserMembership = ({navigation, route}) => {
       bounces={false}
       style={[styles.container]}
       contentContainerStyle={{paddingBottom: 10}}>
-      <Header back title={'Subscription'} normalBack navigation={navigation} />
+      <Header back={hideBack?false:true} title={'Subscription'} normalBack navigation={navigation} />
       <View style={styles.card}>
         <Text style={styles.catText}> Monthly Subscription</Text>
         <HStack p={5}>

@@ -11,9 +11,18 @@ import LocationIcon from '../../../../assets/svgs/location.svg'
 import AddressIcon from '../../../../assets/svgs/address.svg'
 export default function NearbyHome(props) {
     const { item, navigation } = props
-    const {latitude,longitude} = useSelector(state=>state.user.currentPosition)
+    const {latitude,longitude} = useSelector(state=>state.user.currentPosition) || {}
     const {lat,lng} = item.location
-    const distance = distanceBetween([latitude,longitude],[lat,lng])
+    let distance = null
+    if (latitude !== undefined && longitude !== undefined) {
+        // Latitude and longitude are not null or undefined
+        // Proceed with your logic here
+        distance = distanceBetween([latitude, longitude], [lat, lng]);
+        // Use the distance variable as needed
+    } else {
+        // Latitude and/or longitude are null or undefined
+        // Handle the case accordingly
+    }
     return (
        <TouchableOpacity style={styles.container} onPress={()=>navigation.navigate("ListingDetail", { item })}>
             <FastImage
@@ -35,10 +44,13 @@ export default function NearbyHome(props) {
                      <AddressIcon width={20} height={20}/>
                     <Text style={styles.subtitle}>{item?.location?.address}</Text>
                 </HStack>
-                <HStack mt={2} alignItems={"center"} >
+                {
+                    distance &&
+                    <HStack mt={2} alignItems={"center"} >
                 <LocationIcon width={15} height={15}/>
-                    <Text style={[styles.subtitle,{marginLeft:10}]}>{distance.toFixed(1)} km away</Text>
+                    <Text style={[styles.subtitle,{marginLeft:10}]}>{distance?.toFixed(1)} km away</Text>
                 </HStack>
+                }
             </VStack>
        </TouchableOpacity>
     )
