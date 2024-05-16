@@ -30,28 +30,7 @@ const SearchScreen = props => {
   const [hits, setHits] = useState([]);
   const [noData, setNoData] = useState(false);
   const [loading, setLoading] = useState(false);
-  const {favorites,userData} = useSelector(state => state.user);
-  const [isFocus,setIsFocus] = useState(true)
   const dispatch = useDispatch()
-  const {latitude, longitude} = useSelector(
-    state => state.user.currentPosition,
-  );
-  const textInputRef = useRef();
-  const getUserData = () => {
-    firestore()
-      .collection('Users')
-      .doc(auth().currentUser.uid)
-      .get()
-      .then(res => {
-        dispatch(setUserData(res.data()));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-  const handleProfile = () => {
-    onToggle();
-  };
   
   const search = (term) => {
     Keyboard.dismiss()
@@ -66,8 +45,7 @@ const SearchScreen = props => {
       .then(({hits}) => {
         if (hits.length == 0) setNoData(true);
         else setNoData(false);
-        hits.map(hit=>console.log(hit))
-        setHits(hits.filter(hit=>hit.membershipActive));
+        setHits(hits.filter(hit=>hit?.membershipActive));
         // if(hits.length >0){
         //   handleSearchHistory(hits,term)
         // }
@@ -170,7 +148,6 @@ const SearchScreen = props => {
           <FlatList
             style={{paddingHorizontal: spacing.medium, flex: 1}}
             data={hits}
-            numColumns={2}
             renderItem={renderCard}
             keyExtractor={keyExtractor}
             bounces={false}

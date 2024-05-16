@@ -20,7 +20,7 @@ export default AccountMenuList = (props) => {
     const { accountStatus, accountId, balance,userType } = useSelector(state => state.user.userData)
     const uid = auth().currentUser.uid
     const {isOpen, onToggle, onClose, onOpen} = useDisclose();
-    const {userData} = useSelector(state => state.user);
+    const {userData, isLive} = useSelector(state => state.user);
     const deleteAccount = async() => {
         Alert.alert(
             "Delete Account",
@@ -270,7 +270,7 @@ export default AccountMenuList = (props) => {
                             {item.label&& <Text style={styles.settingsText}>{item.label}</Text>}
                             {
                                 item.subMenu.map((subItem,index) => {
-                                    if(subItem.label != "Subscription"||(subItem.label == "Subscription" && userData?.subscriptionId))
+                                    if(subItem.label != "Subscription"||(subItem.label == "Subscription" && isLive &&  userData?.subscriptionId))
     
                                     return (
                                         <TouchableOpacity

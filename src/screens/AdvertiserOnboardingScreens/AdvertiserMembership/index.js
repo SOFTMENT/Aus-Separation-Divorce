@@ -64,8 +64,6 @@ const AdvertiserMembership = ({navigation, route}) => {
   const presentSheet = async (subscriptionId) => {
     setLoading(true);
     const {error} = await presentPaymentSheet();
-    console.log("")
-    console.log(error);
     if (error) {
       if (error.code === PaymentSheetError.Failed) {
         console.log(error);
@@ -95,7 +93,7 @@ const AdvertiserMembership = ({navigation, route}) => {
       bounces={false}
       style={[styles.container]}
       contentContainerStyle={{paddingBottom: 10}}>
-      <Header back={hideBack?false:true} title={'Subscription'} normalBack navigation={navigation} />
+      <Header back={true} title={'Subscription'} normalBack navigation={navigation} />
       <View style={styles.card}>
         <Text style={styles.catText}> Monthly Subscription</Text>
         <HStack p={5}>

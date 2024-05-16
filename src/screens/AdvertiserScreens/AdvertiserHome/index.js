@@ -15,6 +15,9 @@ import { fontSizes, spacing } from '../../../common/variables';
 import Header from '../../../components/Header';
 import colors from '../../../theme/colors';
 import styles from './styles';
+import { useEffect } from 'react';
+import firestore from '@react-native-firebase/firestore'
+import { setIsLive } from '../../../store/userSlice';
 export default function AdvertiserHome(props) {
   const {route, navigation} = props;
   // const {item} = route.params;
@@ -27,6 +30,13 @@ export default function AdvertiserHome(props) {
     setSelectedIndex(index);
     setImageSlider(true);
   };
+  useEffect(()=>{
+    firestore().collection("AppLive").doc("e1SSSyK5SQI3z4yJShYu")
+    .get()
+    .then(res=>{
+      dispatch(setIsLive(res.data().isLive))
+    })
+  })
   const [imageSlider, setImageSlider] = useState(false);
   // useEffect(()=>{
   //     firestore()
