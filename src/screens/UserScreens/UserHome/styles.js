@@ -22,9 +22,10 @@ const styles =  StyleSheet.create({
         alignItems:"center"
     },
     hello:{
-        color:"gray",
-        fontSize:responsiveSize(15),
-        fontFamily:fonts.medium
+        color:"black",
+        fontSize:responsiveSize(16),
+        fontFamily:fonts.medium,
+        width:"95%",
     },
     name:{
         color:"black",

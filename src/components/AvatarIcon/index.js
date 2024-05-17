@@ -9,13 +9,13 @@ const styles = StyleSheet.create({
         borderRadius:25
     }
 })
-export default AvatarIcon = ({uri,style,size,defaultSource,pressable,onPress}) => {
+export default AvatarIcon = ({uri, src, style, size, defaultSource, pressable, onPress}) => {
     return(
         <TouchableOpacity disabled={!pressable} onPress={onPress}>
             <FastImage
                 style={[styles.imageStyle,size&&{width:size,height:size,borderRadius:size/2},style]}
                 resizeMode={"cover"}
-                source={{uri:uri}}
+                source={src?src:{uri:uri}}
                 defaultSource={defaultSource?defaultSource:images.defaultUser}
             />
         </TouchableOpacity>

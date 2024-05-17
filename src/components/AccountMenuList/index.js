@@ -17,8 +17,6 @@ export default AccountMenuList = (props) => {
     const { navigation, isUser } = props
     const [loaderVisibility, setLoaderVisibility] = useState(false)
     const [successPopup, setSuccessPopup] = useState(false)
-    const { accountStatus, accountId, balance,userType } = useSelector(state => state.user.userData)
-    const uid = auth().currentUser.uid
     const {isOpen, onToggle, onClose, onOpen} = useDisclose();
     const {userData, isLive} = useSelector(state => state.user);
     const deleteAccount = async() => {
@@ -91,6 +89,20 @@ export default AccountMenuList = (props) => {
             console.log(error)
         }
     }
+    const switchUser = async () => {
+        try {
+            await AsyncStorage.removeItem("userType")
+            // if (auth().currentUser.providerData[0].providerId == "google.com") {
+            //     //await GoogleSignin.revokeAccess();
+            //     await GoogleSignin.signOut();
+            // }
+            auth()
+                .signOut()
+                .then(() => navigateAndReset("OnboardingScreen"));
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const shareApp = async() => {
         try {
             const result = await Share.share({
@@ -127,76 +139,63 @@ export default AccountMenuList = (props) => {
     const handleSubscription = () => {
         onOpen()
     }
-    const driverMenu = [
+    const userMenu = [
         
-        // {
-        //     id: "about",
-        //     label: "About Us",
-        //     subMenu: [
-        //         // {
-        //         //     label:"Privacy Policy",
-        //         //     icon:images.privacyPolicy
-        //         // },
-        //         // {
-        //         //     label: "Terms & Conditions",
-        //         //     icon: "file-document-outline",
-        //         //     onClick: () => {
-        //         //         linkingUtil.openBrowser("https://www.softment.in/about-us/")
-        //         //     }
-        //         // },
-        //         // {
-        //         //     label: "App Developer",
-        //         //     icon: "code-tags",
-        //         //     onClick: () => {
-        //         //         linkingUtil.openBrowser(SOFTMENT)
-        //         //     }
-        //         // }
-        //     ]
-        // },
         {
-            id: "other",
-            label: "Legal Agreements",
+            id: "Settings",
+            label: "About Us",
             subMenu: [
+                {
+                    label: "Share App",
+                    icon: "share-circle",
+                    onClick: shareApp,
+                    asMaterial:true
+                },
+               
                 {
                     label: "Rate App",
                     icon: "star-half-full",
                     onClick: rateUs,
                     asMaterial:true
                 },
-                // {
-                //     label: "Contact Us",
-                //     icon: "email-outline",
-                //     onClick: () => {
-                //         linkingUtil.openMail(AppConstant.MAIL)
-                //     }
-                // },
+            ]
+        },
+        {
+            id: "other",
+            label: "Legal Agreements",
+            subMenu: [
                 {
-                    label: "Logout",
-                    icon: "log-out",
+                    label: "Privacy Policy",
+                    icon: "file-document-edit",
+                    asMaterial:true,
                     onClick: () => {
-                        logout()
+                        navigation.navigate("PDFViewer",{title:"Privacy Policy",uri:'https://firebasestorage.googleapis.com/v0/b/aus-sepration-divorce.appspot.com/o/Documents%2FAS%26D%20Privacy%20Policy.pdf?alt=media&token=4162c64c-da26-417a-940c-d07505ba8983'})
                     }
                 },
                 {
-                    label: "Delete Account",
-                    icon: "delete",
+                    label: "Terms & Conditions",
+                    icon: "text-box",
                     asMaterial:true,
-                    //subLabel:`AED ${balance?.toString()}`,
                     onClick: () => {
-                        deleteAccount()
-                    },
-                    //disabled:true
+                        navigation.navigate("PDFViewer",{title:"Terms & Conditions",uri:'https://firebasestorage.googleapis.com/v0/b/aus-sepration-divorce.appspot.com/o/Documents%2FAS%26D%20Terms%20and%20conditions.pdf?alt=media&token=d0c36a1f-1b9d-4c5d-b3d1-f8a5e4213acb'})
+                    }
+                },
+                {
+                    label: "Switch profile",
+                    icon: "log-out",
+                    onClick: () => {
+                        switchUser()
+                    }
                 },
             ]
-        },
-
+        }
 
     ]
     const menu = [
         
         {
             id: "Settings",
-            label: "",
+            label: "About Us",
             subMenu: [
                 {
                     label: "Subscription",
@@ -260,7 +259,7 @@ export default AccountMenuList = (props) => {
         }
 
     ]
-    const activeMenu = menu
+    const activeMenu =userData?menu:userMenu
     return (
         <View>
             {

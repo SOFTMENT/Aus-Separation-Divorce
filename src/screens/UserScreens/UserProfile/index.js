@@ -19,8 +19,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const UserProfile = props => {
   const {navigation, userData, state} = props;
-  const {profilePic, name, uid} = userData;
-  const {favorites, orderCount} = useSelector(state => state.user);
   const [profileImage, setProfileImage] = useState(null);
   const [menuOpen,setMenuOpen] = useState(false)
   const dispatch = useDispatch();
@@ -29,47 +27,47 @@ const UserProfile = props => {
       uploadImage();
     }
   }, [profileImage]);
-  const uploadImage = async () => {
-    try {
-      const profileUrl = await Helper.uploadImage(
-        `ProfilePic/${uid}`,
-        profileImage,
-      );
-      updateUserData({
-        profilePic: profileUrl,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const updateUserData = obj => {
-    firestore()
-      .collection('Users')
-      .doc(uid)
-      .update(obj)
-      .then(() => {
-        // Util.showMessage('success', 'Success', 'Profile updated!');
-        getUserData();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-  const getUserData = () => {
-    firestore()
-      .collection('Users')
-      .doc(uid)
-      .get()
-      .then(res => {
-        dispatch(setUserData(res.data()));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-  const handleProfile = () => {
-    onToggle();
-  };
+  // const uploadImage = async () => {
+  //   try {
+  //     const profileUrl = await Helper.uploadImage(
+  //       `ProfilePic/${uid}`,
+  //       profileImage,
+  //     );
+  //     updateUserData({
+  //       profilePic: profileUrl,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const updateUserData = obj => {
+  //   firestore()
+  //     .collection('Users')
+  //     .doc(uid)
+  //     .update(obj)
+  //     .then(() => {
+  //       // Util.showMessage('success', 'Success', 'Profile updated!');
+  //       getUserData();
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // };
+  // const getUserData = () => {
+  //   firestore()
+  //     .collection('Users')
+  //     .doc(uid)
+  //     .get()
+  //     .then(res => {
+  //       dispatch(setUserData(res.data()));
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // };
+  // const handleProfile = () => {
+  //   onToggle();
+  // };
   const {isOpen, onToggle, onClose, onOpen} = useDisclose();
   const insets = useSafeAreaInsets()
   return (
@@ -77,13 +75,13 @@ const UserProfile = props => {
       style={[styles.container]}
       bounces={false}
       showsVerticalScrollIndicator={false}>
-      {/* <Header
+      <Header
         navigation={navigation}
         title="My Profile"
         // rightIcon={"logout"}
         // onRightIconPress={logout}
-      /> */}
-      <View style={[styles.topView,{paddingTop: insets.top}]}>
+      />
+      {/* <View style={[styles.topView,{paddingTop: insets.top}]}>
         <IconButton 
               style={{position:"absolute",right:20,top:40}}
               onPress={()=>setMenuOpen(true)}
@@ -111,7 +109,7 @@ const UserProfile = props => {
             </Text>
           </VStack>
          
-      </View>
+      </View> */}
       
       {/* <VStack my={3} mx={9} >
           <HStack alignItems={'center'} width={"100%"} justifyContent={"space-between"}>

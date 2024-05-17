@@ -168,7 +168,7 @@ function UserBottomTab() {
             />
             <Tab.Screen name="Setting" component={MyProfileStack}
                 options={{
-                    title:'Profile',
+                    title:'Setting',
                     tabBarIcon: ({ color, size }) => {
                         return (
                             <View style={[styles.activeBackground,{backgroundColor:colors.appDefaultColor == color?"white":"transparent"}]}>

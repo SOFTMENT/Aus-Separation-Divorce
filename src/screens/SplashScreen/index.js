@@ -27,13 +27,8 @@ const SplashScreen = (props) => {
                         .then(async doc => {
                             const userDoc = doc.data()
                             if (!doc.exists) {
-                                auth().signOut()
-                                    .then(() => {
-                                        navigateAndReset("OnboardingScreen")
-                                    })
-                                    .catch(() => {
-                                        navigateAndReset("OnboardingScreen")
-                                    })
+                                navigateAndReset("UserBottomTab")
+                                return
 
                             }
                             if (userDoc.isAdmin) {

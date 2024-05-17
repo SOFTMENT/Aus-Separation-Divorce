@@ -179,15 +179,15 @@ export default function UserHome(props) {
   const [locationModal, setLocationModal] = useState(false);
   const inset = useSafeAreaInsets();
   const dispatch = useDispatch();
-  const {userData} = useSelector(state => state.user);
+  // const {userData} = useSelector(state => state.user);
   const {isOpen, onOpen, onClose} = useDisclose();
-  const {name, profilePic} = userData;
+  // const {name, profilePic} = userData;
   const handleLocationRejection = () => {
-    setLoading(false);
-    setLocationModal(true);
+    getTopData()
+    //setLocationModal(true);
   };
   const handleNotNow = () => {
-    setLocationModal(false);
+    //setLocationModal(false);
     getTopData()
   };
   const getTopData = async() => {
@@ -211,7 +211,7 @@ export default function UserHome(props) {
     }
   }
   const handleLocationAcceptance = () => {
-    setLocationModal(false);
+    //setLocationModal(false);
     Geolocation.getCurrentPosition(
       value => {
         const location = {
@@ -339,14 +339,15 @@ export default function UserHome(props) {
       <View style={styles.topView}>
         <AvatarIcon
           size={60}
-          uri={profilePic}
-          style={{borderColor: 'gray'}}
+          src={images.logo}
+          // uri={profilePic}
+          style={{borderColor: 'gray',borderRadius:10}}
           defaultSource={images.defaultUser}
           //borderWidth={1}
         />
         <View style={{marginLeft:10}}>
-          <Text style={styles.hello}>Hello,</Text>
-          <Text style={styles.name}>{startCase(name)}</Text>
+          <Text style={styles.hello}>Australian Sepration and Divorce</Text>
+          {/* <Text style={styles.name}>{startCase(name)}</Text> */}
         </View>
         
         {/* {Util.getNameInitial(name)}

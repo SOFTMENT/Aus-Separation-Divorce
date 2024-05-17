@@ -7,12 +7,37 @@ import {spacing} from '../../../common/variables';
 import MyButton from '../../../components/MyButton';
 import styles from './styles';
 import colors from '../../../theme/colors';
+import { useState } from 'react';
+import { navigateAndReset } from '../../../navigators/RootNavigation';
+import auth from '@react-native-firebase/auth'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Util from '../../../common/util';
 export default function OnboardingScreen(props) {
   const {navigation} = props;
   const inset = useSafeAreaInsets();
+  const [loading,setLoading] = useState(false)
   const handleNavigation = tab => {
     navigation.navigate('LoginScreen', {tab});
   };
+  const userAnonymousSignin = () => {
+    setLoading(true)
+    auth()
+    .signInAnonymously()
+    .then(async() => {
+      await AsyncStorage.setItem("userType",Util.getUserType(1))
+      navigateAndReset('UserBottomTab');
+    })
+    .catch(error => {
+      if (error.code === 'auth/operation-not-allowed') {
+        console.log('Enable anonymous in your firebase console.');
+      }
+
+      console.error(error);
+    })
+    .finally(()=>{
+      setLoading(false)
+    })
+  }
   return (
     <View style={[styles.container]}>
       <Image
@@ -32,9 +57,10 @@ export default function OnboardingScreen(props) {
       <View style={styles.btnView}>
         <VStack width={'90%'} justifyContent={'space-between'}>
           <MyButton
+            loading={loading}
             title={'USER'}
             //containerStyle={[styles.btn]}
-            onPress={() => handleNavigation(1)}
+            onPress={() => userAnonymousSignin()}
           />
           <MyButton
             title={'ADVERTISER'}
