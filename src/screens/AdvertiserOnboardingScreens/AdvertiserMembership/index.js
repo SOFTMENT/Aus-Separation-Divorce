@@ -97,7 +97,7 @@ const AdvertiserMembership = ({navigation, route}) => {
       <View style={styles.card}>
         <Text style={styles.catText}> Monthly Subscription</Text>
         <HStack p={5}>
-          <Text style={styles.subText}>$4.99</Text>
+          <Text style={styles.subText}>$7.99</Text>
           <Text
             style={[
               styles.subText,
@@ -135,7 +135,7 @@ const AdvertiserMembership = ({navigation, route}) => {
       </View>
       <Text style={styles.noteText}>
         • Advertisers who want to use the advertising platform are required to
-        pay a fee. In this case, the fee is $4.99 AUD.
+        pay a fee. In this case, the fee is $7.99 AUD.
       </Text>
       <Text style={styles.noteText}>
         • The subscription is not a one-time payment; it recurs every month.

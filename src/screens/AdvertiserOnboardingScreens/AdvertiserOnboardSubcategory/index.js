@@ -23,6 +23,8 @@ const AdvertiserOnboardSubcategory = ({navigation,route}) => {
     function compare(a, b) {
         if (a.name === "Other") return 1; // "Other" should come last
         if (b.name === "Other") return -1; // "Other" should come last
+        if (a.name === "Family Dispute Resolution") return -1; // "Other" should come last
+        if (b.name === "Family Dispute Resolution") return 1; // "Other" should come last
         return a.name.localeCompare(b.name); // Sort alphabetically for other names
     }
     const getCategories = () => {

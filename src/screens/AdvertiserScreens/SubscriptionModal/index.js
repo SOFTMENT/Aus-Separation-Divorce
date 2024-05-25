@@ -63,7 +63,7 @@ const SubscriptionModal = ({isOpen, onClose}) => {
         <HStack w={"90%"} justifyContent={"space-between"} alignItems={"center"}>
           <VStack >
             <Text>Subscription</Text>
-            <Text color={colors.appPrimary}>AUD 4.99 / Month</Text>
+            <Text color={colors.appPrimary}>AUD 7.99 / Month</Text>
           </VStack>
           {formattedText()}
         </HStack>
